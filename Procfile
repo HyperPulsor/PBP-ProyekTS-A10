@@ -1,0 +1,1 @@
+web: gunicorn medsos.wsgi --log-file -
