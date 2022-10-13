@@ -2,11 +2,17 @@ name: Deploy
 
 on:
   push:
-    branches-ignore:
-      - template
-  pull_request:
-    branches-ignore:
-      - template
+    # Reminder: Make sure the `branches` list only contain the name of main
+    # branch! Usually, the main branch name is either `master` or `main`.
+    # Check the list of branches of your repository via GitHub Web interface or
+    # use `git branch -av` command in your shell.
+
+    # This event trigger will only run the workflow whenever there are new
+    # commits pushed to the main branch. Therefore, the deployed app that
+    # will be accessed by users will be based on the latest version of the
+    # main branch.
+    branches:
+      - main
 
 jobs:
   Deployment:
@@ -17,21 +23,20 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby 2.7
-      uses: actions/setup-ruby@v1
+      uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.7
+        ruby-version: '2.7'
     - name: Install dpl
       run: gem install dpl
-    - name: Install Heroku CLI
-      run: wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
     - name: Deploy to Heroku
       run: dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY
-    - name: Run migrations on Heroku
-      run: heroku run --app $HEROKU_APP_NAME migrate
     - uses: chrnorm/deployment-action@releases/v1
       name: Create GitHub deployment
       with:
         initial_status: success
         token: ${{ github.token }}
+        # Assuming you are not using custom domain on Heroku, the target_url
+        # will contain the URL to your application hosted under Heroku's
+        # subdomain.
         target_url: https://${{ secrets.HEROKU_APP_NAME }}.herokuapp.com
         environment: production
