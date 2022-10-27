@@ -1,0 +1,28 @@
+body{
+    background-color:white;
+    font-family: sans-serif;
+    color: black;
+}
+
+h1{
+    text-align: center; 
+    margin: 2rem auto 2.5rem auto;
+}
+
+.container{
+    width: 200%;
+    margin: 1.8rem auto 0 auto;
+}
+
+#buatproject{
+    background-color: aquamarine;
+    padding: 2rem 3rem;
+    border-radius: 0.5rem;
+    margin: 0 2.5rem 1.2rem 4rem;
+}
+
+@media(min-width: 768px){
+    .container{
+      max-width: 640px
+    }
+}
