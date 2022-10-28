@@ -14,6 +14,7 @@ from django.http import HttpResponse
 from django.core import serializers
 
 # Create your views here.
+
 @login_required(login_url='/landing/login/')
 def add_item_seller(request):
     if request.method == "POST":
@@ -54,10 +55,6 @@ def register(request):
             return redirect('landing:login')
     context = {'form':form}
     return render(request, 'register.html', context)
-
-@login_required(login_url='/landing/login/')
-def show_item(request):
-    return render(request, "show.html")
 
 @login_required(login_url='/landing/login/')
 def show_json(request):
