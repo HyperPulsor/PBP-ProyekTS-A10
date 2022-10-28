@@ -19,5 +19,6 @@ import profile_handler.urls as profile_handler
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('profile_handler/', include(profile_handler)),
+    path('', include('addproduct.urls')),
+    path('account/', include('account.urls')),
 ]
