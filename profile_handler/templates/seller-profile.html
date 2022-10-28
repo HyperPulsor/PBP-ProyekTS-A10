@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+    <head>
+        <title>Profile</title>
+    </head>
+
+    <body>
+        <h1>Your Profile<h1>
+        <hr>
+        <div class="profile-data">
+            {% if user.is_authenticated %}
+                <label for="nama">Nama: </label>
+                <p id="nama">{{user.nama}}</p>
+                <label for="username">Username: </label>
+                <p id="username">{{user.username}}</p>
+                <label for="email">Email: </label>
+                <p id="email">{{user.email}}</p>
+                <label for="password">Password: </label>
+                <p id="password">{{user.password1}}</p>
+                <label for="namausaha">Nama Usaha: </label>
+                <p id="namausaha">{{user.namausaha}}</p>
+                <label for="deskripsi">Deskripsi: </label>
+                <p id="deskripsi">{{user.deskripsi}</p>
+                <label for="alamat">Alamat: </label>
+                <p id="alamat">{{user.alamat}</p>
+                <label for="kontak">Kontak: </label>
+                <p id="kontak">{{user.kontak}</p>
+                <label for="linktoko">Tautan Toko: </label>
+                <p id="linktoko">{{user.linktoko}</p>
+            {% endif %}
+
+            <a class="edit-profile" href="/profile_handler/edit/seller/">Edit</a>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+    <head>
+        <title>Edit Profile</title>
+    </head>
+
+    <body>
+        <h1>Edit Your Profile<h1>
+        <hr>
+        <form action="" method="POST" }>
+            {% csrf_token %}
+            <label for="nama">Nama: </label>
+            <input name="nama" type="text" required class="form-control" id="nama" placeholder="Masukkan nama Anda...">
+            <br>
+            <label for="username">Username: </label>
+            <input name="username" type="text" required class="form-control" id="username" placeholder="Masukkan username baru Anda...">
+            <br>
+            <label for="email">Email: </label>
+            <input name="email" type="text" required class="form-control" id="email" placeholder="Masukkan email Anda...">
+            <br>
+            <label for="password">Password: </label>
+            <input name="password" type="text" required class="form-control" id="password" placeholder="Masukkan password baru Anda...">
+            <br>
+            <input class="save btn btn-outline-success btn-form" type="submit" value="SAVE">
+        </form>
+        </div>
+    </body>
+</html>
