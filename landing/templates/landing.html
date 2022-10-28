@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% block meta %}
+<title>Seller Barang</title>
+{% endblock meta %}
+
+<head>
+    
+</head>
+<body>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        Nama Barang
+        <input type="text" name="item_name" class="form-control"/>
+        Deskripsi Barang
+        <input type="text" name="item_description" class="form-control"/>
+        Input Image
+        <input type="file" name="upload" accept="image/*"/>
+        <select name="languages" id="lang">
+            <option value="javascript">Makanan</option>
+            <option value="php">Minuman</option>
+            <option value="java">Pakaian</option>
+          </select>
+        <input
+        class="btn btn-success mx-3 mt-3"
+        type="submit"
+        name="submit"
+        value="Submit"
+      />
+    </form>
+</body>
+{% endblock content %}
