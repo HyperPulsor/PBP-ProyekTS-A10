@@ -1,19 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
-
-class Project(models.Model):
-    nama_pemilik = models.CharField(max_length=50)
-    id_pemilik = models.ForeignKey(to=User, on_delete=models.CASCADE)
-    nama_project = models.CharField(max_length=50)
-    kategori = models.CharField(max_length=50)
-    bayaran = models.IntegerField()
-    deskripsi = models.TextField()
-    estimasi = models.CharField(max_length=30)
-    skills = models.TextField()
-    kontak_pemilik = models.TextField()
-    jumlah_orang = models.IntegerField()
-    acc = models.BooleanField(default=False)
-    buka = models.BooleanField(default=True)
 
 class MultiImage(models.Model):
     def default(self):
