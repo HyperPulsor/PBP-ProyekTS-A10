@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Author, ForumUMKM, Replies
 
-# Register your models here.
+admin.site.register(ForumUMKM)
+admin.site.register(Replies)
