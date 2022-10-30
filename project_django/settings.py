@@ -39,17 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
-    'example_app',
     'adminfaq',
     'addproduct',
     'validasiproduct',
     'addkategori',
-=======
     'forum',
     'addproduct',
     'account',
->>>>>>> c57b60447fc720857d453da2544b389659f67c4a
 ]
 
 MIDDLEWARE = [
