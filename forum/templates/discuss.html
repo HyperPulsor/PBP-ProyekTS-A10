@@ -76,15 +76,17 @@
                     <h5><b>{{forum.title}}</b></h5>
                 </tr>
                 <tr>
-                    <p>{{forum.user}} | {{forum.time}}</p>
+                    <p>{{forum.user.username}} | {{forum.time}}</p>
                 </tr>
                 <tr>
-                    <p>{{forum.discussion}}</p>
+                    {{forum.discussion}}
                 </tr>
             </table>
             <button href="" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modeladd" id="modalbtn">Reply</button>
             <!--admin only-->
+            {% if admin or user_forum %}
             <a href='/forum/delete/{{forum.pk}}' id="deletebtn" class="btn btn-primary" >Delete</a>
+            {% endif %}
             <!--admin only-->
         </div>
     </div>
@@ -109,7 +111,7 @@
                         <div class="container">
                             <table id="table">
                                 <tr>
-                                    <td><b>${item.fields.user} | ${formatDate} </b></td>
+                                    <td><b>${item.fields.username} | ${formatDate} </b></td>
                                 </tr>
                                 <tr>
                                     <td>${item.fields.discussion}</td>
