@@ -1,0 +1,259 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<body>
+  <div class="navbar navbar-light navbar-expand-lg bg-primary">
+    <div class="container-fluid" id="container-navbar">
+      <div class="navbar-brand mx-5">
+        <img
+          src="{% static 'images/logo.png' %}"
+          width="30"
+          height="30"
+          class="d-inline-block align-top"
+          alt=""
+        />
+        <a href="#" style="color: white; text-decoration: none">MedsosUMKM</a>
+      </div>
+      <div class="container-flex justify-content-space-between mx-5">
+        <a
+          href="{% url 'account:adminpage' %}"
+          class="mx-2"
+          style="color: white; text-decoration: none; text-align: right"
+          >Home</a
+        >
+        <a
+          href="#"
+          class="mx-2"
+          style="color: white; text-decoration: none; text-align: right"
+          >Catalog</a
+        >
+        <a role="button" href="{% url 'account:logout' %}" class="btn btn-light mx-2" style="text-align: right"
+          >Logout</a
+        >
+      </div>
+    </div>
+  </div>
+  <div class="container d-flex mt-5 justify-content-center align-item-center">
+    <img src="{% static 'images/main-pic.jpg'%}" alt="top-pic"/>
+  </div>
+  <div class="container-lg mt-5 mb-2 mr-3">
+    <h4 style="text-align: center">SELAMAT DATANG DI</h4>
+    <h5 style="text-align: center">"MedsosUMKM"</h5>
+    <p style="text-align: justify">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mollis lectus
+      leo. Aliquam quis turpis cursus turpis tempor molestie sit amet eget
+      magna. Aliquam hendrerit sagittis orci eu convallis. Curabitur efficitur
+      orci at dignissim ultricies. Sed rhoncus pellentesque feugiat. Sed
+      imperdiet quis nunc eu feugiat. Nam vel imperdiet metus, eget facilisis
+      mauris. Mauris eu nibh semper, gravida ante sit amet, eleifend lacus.
+      Etiam et eros nisi.Integer vestibulum nulla ipsum. Maecenas facilisis, sem
+      eu pulvinar rhoncus, eros ante commodo diam, eu vulputate augue orci sed
+      magna. Nulla facilisi. Aenean efficitur lorem mi, non tristique tellus
+      dignissim quis. Sed venenatis turpis ipsum, at finibus orci vulputate
+      quis. Donec pellentesque ipsum non ultricies vehicula. Suspendisse
+      faucibus rhoncus eleifend.
+    </p>
+  </div>
+  <div
+    class="container d-flex justify-content-center align-item-center text-align-center mt-5"
+  >
+    <h4>OUR SERVICES</h4>
+  </div>
+  <div
+    class="container d-flex justify-content-center align-item-center text-align-center mt-5 mb-5"
+  >
+    <div class="row">
+      <div class="col-6">
+        <div class="card text-center h-50 mb-3">
+          <img src="" alt="" class="card-img-top" />
+          <div class="card-body">
+            <div class="card-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
+                dictum finibus eros in porta. Nullam cursus, felis ac lobortis
+                pharetra, risus augue lobortis felis, at finibus nulla nisl id
+                mi.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="card text-center h-50">
+          <img src="" alt="" class="card-img-top" />
+          <div class="card-body">
+            <div class="card-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
+                dictum finibus eros in porta. Nullam cursus, felis ac lobortis
+                pharetra, risus augue lobortis felis, at finibus nulla nisl id
+                mi.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card text-center h-50 mb-3">
+          <img src="" alt="" class="card-img-top" />
+          <div class="card-body">
+            <div class="card-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
+                dictum finibus eros in porta. Nullam cursus, felis ac lobortis
+                pharetra, risus augue lobortis felis, at finibus nulla nisl id
+                mi.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="card text-center h-50 mb-5">
+          <img src="" alt="" class="card-img-top" />
+          <div class="card-body">
+            <div class="card-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
+                dictum finibus eros in porta. Nullam cursus, felis ac lobortis
+                pharetra, risus augue lobortis felis, at finibus nulla nisl id
+                mi.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="container d-flex justify-content-center align-item-center text-align-center mt-5 mb-5"
+  >
+    <h4>EXPLORE CATEGORIES</h4>
+  </div>
+  <div class="container-lg mt-4 justify-content-center align-item-center">
+    <div class="row">
+      {% for cards in allCards %}
+      <div class="col-4 mt-4 mb-4">
+        <div class="card text-center h-100">
+          <img src="{{cards.file_url}}" class="card-img-top" />
+          <div class="card-body">
+            <div class="card-title" style="text-align: left">
+              <h4 class="card-title">{{cards.name}}</h4>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-primary">Button</button>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div
+    class="container d-flex justify-content-center align-item-center text-align-center mt-5 mb-2"
+  >
+    <h4>FAQ</h4>
+  </div>
+  <div
+    class="container-lg justify-content-center align-item-center text-align-center"
+  >
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseOne"
+            aria-expanded="true"
+            aria-controls="collapseOne"
+          >
+            Question #1
+          </button>
+        </h2>
+        <div
+          id="collapseOne"
+          class="accordion-collapse collapse show"
+          aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            <strong>This is the first item's accordion body.</strong> It is
+            shown by default, until the collapse plugin adds the appropriate
+            classes that we use to style each element. These classes control the
+            overall appearance, as well as the showing and hiding via CSS
+            transitions. You can modify any of this with custom CSS or
+            overriding our default variables. It's also worth noting that just
+            about any HTML can go within the <code>.accordion-body</code>,
+            though the transition does limit overflow.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseTwo"
+            aria-expanded="false"
+            aria-controls="collapseTwo"
+          >
+            Question #2
+          </button>
+        </h2>
+        <div
+          id="collapseTwo"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingTwo"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            <strong>This is the second item's accordion body.</strong> It is
+            hidden by default, until the collapse plugin adds the appropriate
+            classes that we use to style each element. These classes control the
+            overall appearance, as well as the showing and hiding via CSS
+            transitions. You can modify any of this with custom CSS or
+            overriding our default variables. It's also worth noting that just
+            about any HTML can go within the <code>.accordion-body</code>,
+            though the transition does limit overflow.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingThree">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseThree"
+            aria-expanded="false"
+            aria-controls="collapseThree"
+          >
+            Question #3
+          </button>
+        </h2>
+        <div
+          id="collapseThree"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingThree"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            <strong>This is the third item's accordion body.</strong> It is
+            hidden by default, until the collapse plugin adds the appropriate
+            classes that we use to style each element. These classes control the
+            overall appearance, as well as the showing and hiding via CSS
+            transitions. You can modify any of this with custom CSS or
+            overriding our default variables. It's also worth noting that just
+            about any HTML can go within the <code>.accordion-body</code>,
+            though the transition does limit overflow.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container d-flex justify-content-center align-item-center mb-5">
+    <div class="mx-2">
+      <button class="btn btn-primary" type="button">Donasi Uang</button>
+    </div>
+    <div class="mx-2">
+      <button class="btn btn-primary" type="button">Donasi Barang</button>
+    </div>
+  </div>
+</body>
+{% endblock content %}
