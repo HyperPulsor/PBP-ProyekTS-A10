@@ -15,7 +15,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 def show_faq(request):
     form = FormFaq()
-    data = Faq.objects.all()
+    data = Faq.objects.filter(user=request.user)
     context = {
         'title' : 'Frequently Asked Question',
         'faq' : data,
@@ -23,29 +23,31 @@ def show_faq(request):
         }
     return render(request, "home.html", context)
 
-#@csrf_exempt
+@csrf_exempt
 def create_faq(request):
     if request.method == "POST":
         form = FormFaq(request.POST)
         if form.is_valid():
             form = Faq()
+            form.user = request.user
             form.question = request.POST.get('question')
             form.answer = request.POST.get('answer')
             form.save()
             return redirect('faq:show_faq')
     else:
         form = FormFaq()
-    context = {'form': form}
-    return render(request, 'faq.html', context)
-    #return JsonResponse({"instance": "FAQ Ditambahkan"},status=200)
+    # context = {'form': form}
+    # return render(request, 'faq.html', context)
+    return JsonResponse({"instance": "FAQ Ditambahkan"},status=200)
     
 def show_json(request):
     data = Faq.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
+@csrf_exempt
 def delete_faq(request, id):
     deletefaq = Faq.objects.get(pk=id)
     deletefaq.delete()
-    return redirect('faq:show_faq')
-    #return JsonResponse({'error': False})
+    # return redirect('faq:show_faq')
+    return JsonResponse({'error': False})
 

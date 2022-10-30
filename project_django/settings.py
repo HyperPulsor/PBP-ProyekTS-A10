@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'example_app',
     'adminfaq',
     'addproduct',
+    'validasiproduct',
+    'addkategori',
 ]
 
 MIDDLEWARE = [
@@ -127,10 +129,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
+    '/var/www/static/',
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
