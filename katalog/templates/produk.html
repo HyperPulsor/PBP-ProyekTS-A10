@@ -33,10 +33,14 @@
                         <div class="container" style="color:black">
                             <div class="card-body flex-column">
                                 <img class="img-fluid pt-3" src="{% static 'kategori/images/2.jpg' %}" alt="Gambar toko">
+                                <img class="img-fluid pt-3" src="{{produk.gambar}}" alt="Gambar toko">
                                 <div class="text-center">
                                     <h5 class="namaToko pt-4"><b>{{produk.namaProduk}}</b></h4>
                                 </div>
-                                <h7 class="deskripsi">{{produk.deskripsi}}</h5> 
+                                <h5 class="deskripsi">{{produk.harga}}</h5>
+                                <h5 class="deskripsi">{{produk.kategori}}</h5>  
+                                <h5 class="deskripsi">{{produk.deskripsi}}</h5> 
+                                <h5 class="deskripsi">{{produk.link}}</h5> 
                             </div>
                         </div>
                     </div>

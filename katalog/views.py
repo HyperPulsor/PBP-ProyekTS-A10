@@ -1,5 +1,6 @@
 from http.client import HTTPResponse
 from django.shortcuts import render
+from addproduct.models import Product
 from katalog.models import Toko, Produk, Favorites
 from account.models import User
 from django.contrib.auth.decorators import login_required
@@ -9,40 +10,28 @@ from django.http import HttpResponseRedirect
 # pass nama dan deskripsi kategori
 # request[?] -> Kategori
 def show_toko_html(request):
-    #kategori = dari request
-    #deskripsi Kategori dari request
-    toko_item = Toko.objects.all()
+    # kategori = request.kategori #pass kategori ke request
+    # deskripsi_kategori = request.deskripsi_kategori #pass deskripsi_kategori ke request
+    toko_item = User.objects.filter(User.is_seller)
+    # toko_item = Toko.objects.all()
     context = {
+        # 'kategori' : kategori,
+        # 'deskripsi_kategori' : deskripsi_kategori,
         'list_toko' : toko_item,
     }
     return render(request, "toko.html", context)
 
 def show_produk_html(request):
-    produk_item = Produk.objects.filter(idToko=1) #id toko dari request
+    produk_item = Produk.objects.filter(idToko=request.user.id) #id toko dari request
     context = {
         'list_produk' : produk_item,
     }
     return render(request, "produk.html", context)
 
-#userid 7 tokoId dari request
-def add_favorites(request):
-    user_id = User.objects.get(id=1) #diganti pakai request
-    toko_id = Toko.objects.get(id=3)
-    new_favorites = Favorites.objects.create(userId=user_id, tokoId=toko_id)
-    return HttpResponseRedirect('/katalog/show_toko')
-    
-
-#userid dari request
-def show_favorites_html(request):
-    user_id = 1 #diganti pakai request
-    favorites = Favorites.objects.filter(userId=user_id)
-    toko_favorite = []
-    
-    for favorite in favorites:
-        toko_favorite.append(favorite.tokoId.id)
-
-    toko_item = Toko.objects.filter(id__in=toko_favorite)
+def show_produk_html_addproduct_model(request):
+    # produk_item = Produk.objects.filter(idToko=request.user.id) #id toko dari request
+    produk_item = Product.objects.filter(idToko=request.user.id) #id toko dari request
     context = {
-        'list_toko' : toko_item,
+        'list_produk' : produk_item,
     }
-    return render(request, "favorites.html", context)
+    return render(request, "produk.html", context)

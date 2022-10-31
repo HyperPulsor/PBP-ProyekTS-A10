@@ -21,6 +21,7 @@ class Product(MultiImage):
     gambar_produk = models.ImageField()
     deskripsi_produk = models.CharField(max_length=255)
     link_produk = models.TextField()
+    # idToko = models.ForeignKey(Toko, on_delete=models.CASCADE)
     is_valid = models.BooleanField()
 
 

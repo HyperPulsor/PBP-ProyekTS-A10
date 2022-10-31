@@ -54,9 +54,12 @@
                             <div class="card-body flex-column">
                                 <img class="img-fluid pt-3" src="{% static 'kategori/images/2.jpg' %}" alt="Gambar toko">
                                 <div class="text-center">
-                                    <h5 class="namaToko pt-4"><b>Toko {{toko.namaToko}}</b></h4>
+                                    <h5 class="namaToko pt-4"><b>Toko {{toko.namausaha}}</b></h4>
                                 </div>
                                 <h7 class="deskripsi">{{toko.deskripsi}}</h5> 
+                                <h7 class="alamat">{{toko.alamat}}</h5> 
+                                <h7 class="kontak">{{toko.kontak}}</h5> 
+                                <h7 class="linktoko">{{toko.linktoko}}</h5> 
                             </div>
                             <div class="float-end pb-3">
                                 <button class="align-self-end btn btn-primary btn-lg" style="margin-top: auto;"><a href="{% url 'katalog:show_produk' %}" class="link-light"><b>Lihat Toko</b></a></button>

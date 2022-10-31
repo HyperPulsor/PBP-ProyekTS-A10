@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'addproduct',
     'account',
     'katalog',
+    'landing',
 ]
 
 MIDDLEWARE = [
