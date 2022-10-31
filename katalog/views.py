@@ -15,8 +15,7 @@ def show_toko_html(request):
     toko_item = User.objects.filter(User.is_seller)
     # toko_item = Toko.objects.all()
     context = {
-        # 'kategori' : kategori,
-        # 'deskripsi_kategori' : deskripsi_kategori,
+        'kategori' : request.kategori,
         'list_toko' : toko_item,
     }
     return render(request, "toko.html", context)
