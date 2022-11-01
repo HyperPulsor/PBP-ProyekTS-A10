@@ -25,7 +25,7 @@ urlpatterns = [
     path('addproduct', include('addproduct.urls')),
     path('validasiproduct/', include('validasiproduct.urls')),
     path('addkategori/', include('addkategori.urls')),
-    path('account/', include('account.urls')),
+    path('', include('account.urls')),
     path('forum/', include('forum.urls')),
     path('katalog/', include('katalog.urls')),
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

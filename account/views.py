@@ -4,6 +4,7 @@ from .models import *
 from .forms import SignUpBuyerForm, SignUpSellerForm, LoginForm, DonasiForm
 from django.contrib.auth import authenticate, login, logout
 import json
+from addkategori.models import Kategori
 
 # Create your views here.
 
@@ -73,7 +74,11 @@ def admin(request):
     return render(request,'show_admin.html')
 
 def buyer(request):
-    return render(request,'show_pembeli.html')
+    kategori_item = Kategori.objects.all()
+    context = {
+        'kategori_item' : kategori_item,
+    }
+    return render(request,'show_pembeli.html', context)
 
 def seller(request):
     return render(request,'show_penjual.html')

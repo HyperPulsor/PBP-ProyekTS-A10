@@ -1,4 +1,6 @@
+from email.policy import default
 from django.db import models
+from account.models import User
 
 class MultiImage(models.Model):
     def default(self):
@@ -14,7 +16,7 @@ class Image(models.Model):
     length = models.FloatField(default=100)
 
 class Product(MultiImage):
-    toko = models.IntegerField()
+    toko = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     nama_produk = models.CharField(max_length=255)
     kategori_produk = models.CharField(max_length=255)
@@ -22,7 +24,6 @@ class Product(MultiImage):
     gambar_produk = models.ImageField()
     deskripsi_produk = models.CharField(max_length=255)
     link_produk = models.TextField()
-    # idToko = models.ForeignKey(Toko, on_delete=models.CASCADE)
     is_valid = models.BooleanField()
 
 
