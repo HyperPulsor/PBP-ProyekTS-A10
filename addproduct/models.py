@@ -16,7 +16,8 @@ class Image(models.Model):
     length = models.FloatField(default=100)
 
 class Product(MultiImage):
-    toko = models.ForeignKey(User, on_delete=models.CASCADE)
+    id_toko = models.IntegerField(default=0)
+    like = models.IntegerField(default=0)
     name = models.CharField(max_length=255)
     nama_produk = models.CharField(max_length=255)
     kategori_produk = models.CharField(max_length=255)
