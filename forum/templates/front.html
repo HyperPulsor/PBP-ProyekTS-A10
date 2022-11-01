@@ -1,0 +1,198 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>Forum UMKM</title>
+    <style>
+        h3{
+            margin: 12px;
+        }
+        body{
+            font-family: 'Poppins';
+            margin:15px;
+        }
+        .card{
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            border-radius: 10px;
+            margin: 25px;
+            color: black;
+        }
+        .container {
+            margin:7px;
+        }
+        a:link{
+            text-decoration: none;
+        }
+        .card:hover{
+            box-shadow: 0 8px 16px 0 #6f9cde;
+        }
+        .dropbtn {
+            background-color: #0d6efd;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 7px;
+            height: 100%;
+        }
+        #modalbtn {
+            height: 100%;
+        }
+        .dropbtn:hover, .dropbtn:focus {
+            background-color: #1464db;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .categories {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            overflow: auto;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .upper {
+            display:flex;
+            justify-content: space-between;
+            margin: 25px;
+        }
+        .frontbtn {
+            justify-content: baseline;
+        }
+        .categories a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown a:hover {background-color: #ddd;}
+        .show {display: block;}
+    </style>
+</head>
+
+<body>
+    <div class="upper">
+        <h3><b>Forum Diskusi</b></h3>
+        <div class = "frontbtn">
+            <div class="dropdown">
+                <button onclick="dropdown()" class="dropbtn" id="dropbtnid"> Kategori <i class="fa fa-caret-down"></i></button>
+                <div id="categorydd" class="categories">
+                    {% for cat in list_category %}
+                    <a id={{cat}} href=/forum/{{cat}}>{{cat}}</a>
+                    {% endfor %}
+                </div>
+            </div>
+            <button href="" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modeladd" id="modalbtn">Buat Forum</button>
+        </div>
+    </div>
+        <div>
+        <div class="modal" tabindex="-1" id="Modeladd">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Forum</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <form method="POST" id="form" onsubmit="return false;">
+                {% csrf_token %}
+                <div class="modal-body">
+                  <div class="row">
+                    <label for="title" class="mb-2 font-5xl">Judul</label>
+                    <input type="text" name="title" id="title" required>
+                  </div>
+                  <div class="row">
+                    <label for="message" class="mb-2 font-5xl">Pesan</label>
+                    <textarea type="text" name="message" id="message" required></textarea>
+                  </div>
+                  <div class="row">
+                    <label for="category" class="mb-2 font-5xl">Kategori</label>
+                    <select id="category" name="category" required>
+                        {% for cat in list_category %}
+                        <option id={{cat}} value={{cat}}>{{cat}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                  <button id="buttonPost" type="submit-button" class="btn btn-primary" >Post</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+    <div id="table"></div>
+    
+    <script>
+        function dropdown(){
+            document.getElementById("categorydd").classList.toggle("show");
+        }
+        window.onclick = async function(event){
+            if (!event.target.matches('.dropbtn')){
+                var dropdowns = document.getElementsByClassName("categories");
+                for (var i = 0; i < dropdowns.length; i++){
+                    var openDd = dropdowns[i];
+                    if (openDd.classList.contains('show')){
+                        openDd.classList.remove('show');
+                    }
+                }
+            }
+        }
+        async function getForum(){
+            return fetch(`/forum/json/{{selected_cat}}`).then((res) => res.json())
+        }
+        async function refreshForum(){
+            document.getElementById("table").innerHTML=""
+            const forum = await getForum()
+            let htmlString = ``
+            forum.forEach((item) => {
+                var date = new Date(item.fields.time)
+                var formatDate = date.toLocaleString()
+                htmlString += `\n
+                <a target="_top" href="/forum/discussion/${item.pk}" style="flex:1;">
+                    <div class="card">
+                        <div class="container">
+                            <table id="table">
+                                <tr>
+                                    <td><h5><b>${item.fields.title}</b></h5></td>
+                                </tr>
+                                <tr>
+                                    <td><p>${item.fields.username} | ${formatDate}</p></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </a>` 
+            })
+            document.getElementById("table").innerHTML = htmlString
+        }
+        //`.\${category}`
+        function addForum(){
+            fetch("{% url 'forum:add_forum' %}", {
+                method: "POST",
+                body: new FormData(document.querySelector('#form'))
+            }).then(refreshForum)
+            document.getElementById("form").reset()
+            return false
+        }
+        document.getElementById("buttonPost").onclick = addForum
+        refreshForum()
+    </script>
+
+</body>
+
+{% endblock content%}

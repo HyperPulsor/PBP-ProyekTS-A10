@@ -14,6 +14,7 @@ class Image(models.Model):
     length = models.FloatField(default=100)
 
 class Product(MultiImage):
+    toko = models.IntegerField()
     name = models.CharField(max_length=255)
     nama_produk = models.CharField(max_length=255)
     kategori_produk = models.CharField(max_length=255)
@@ -21,6 +22,7 @@ class Product(MultiImage):
     gambar_produk = models.ImageField()
     deskripsi_produk = models.CharField(max_length=255)
     link_produk = models.TextField()
+    # idToko = models.ForeignKey(Toko, on_delete=models.CASCADE)
     is_valid = models.BooleanField()
 
 

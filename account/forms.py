@@ -1,6 +1,15 @@
+from dataclasses import fields
+from pyexpat import model
 from django import forms
+from account.models import Donasi
 from django.contrib.auth.forms import UserCreationForm
 from .models import User
+from account import models
+
+class DonasiForm(forms.ModelForm):
+    class Meta:
+        model = Donasi
+        fields = ['input_uang', 'input_barang']
 
 class LoginForm(forms.Form):
     username = forms.CharField(

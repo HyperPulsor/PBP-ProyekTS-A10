@@ -17,9 +17,17 @@ from django.contrib import admin
 from django.urls import path, include
 import profile_handler.urls as profile_handler
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('addproduct.urls')),
+    path('adminfaq/', include('adminfaq.urls')),
+    path('addproduct', include('addproduct.urls')),
+    path('validasiproduct/', include('validasiproduct.urls')),
+    path('addkategori/', include('addkategori.urls')),
     path('account/', include('account.urls')),
     path('profile_handler/', include(profile_handler)),
-]
+    path('forum/', include('forum.urls')),
+    path('katalog/', include('katalog.urls')),
+]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
