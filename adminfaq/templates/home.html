@@ -1,0 +1,136 @@
+{% extends 'base.html' %} {% block meta %}
+<style>
+  .accordion {
+    cursor: pointer;
+    padding: 15px;
+    width: 100%;
+    text-align: center;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+  }
+
+  .accordion-body {
+    background-color: rgba(225, 211, 211, 0.864);
+  }
+
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+  .accordion-button:hover {
+    background-color: lightcyan;
+  }
+
+  .atas {
+    padding-right: 150px;
+    padding-left: 250px;
+    padding-top: 100px;
+    padding-bottom: 50px;
+  }
+
+  .container {
+    padding-right: 200px;
+    padding-left: 200px;
+  }
+
+  #faqs {
+    padding-right: 200px;
+    padding-left: 200px;
+  }
+</style>
+
+{% endblock meta %} {% block content %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<body>
+  <div class="atas">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <h3><strong> Halaman Menambahkan Frequently Asked Questions</strong></h3>
+      </div>
+    </nav>
+    <div class="d-flex justify-content-center">
+      <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Add FAQ</button>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add FAQ</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <form method="POST" action="">
+            {% csrf_token %}
+            <div class="mt-4">
+              <label for="question">Question</label>
+            </div>
+            <input id="question-controller" name="question" placeholder="New Question" required class="form-control" />
+            <div class="mt-4">
+              <label for="answer">Answer</label>
+            </div>
+            <textarea id="answer-controller" name="answer" placeholder="Answer" cols="30" rows="10" required class="form-control"></textarea>
+            <div class="modal-footer">
+              <button id="save-faq" class="btn btn-primary" value="Submit" onclick="">Add</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="faqs" class="row text-center"></div>
+</body>
+
+<script>
+  function createFaq() {
+    $.post({
+      url: `create_faq/`,
+      type: "post",
+      data: {
+        question: $("#question-controller").val(),
+        answer: $("#answer-controller").val(),
+      },
+      success: showFaq,
+    });
+  }
+  $(`#save-faq`).attr("onclick", `createFaq()`);
+
+  function deleteFaq(pk) {
+    $.post({
+      url: `delete_faq/${pk}/`,
+      type: "post",
+      data: {},
+      success: showFaq,
+    });
+  }
+
+  function showFaq() {
+    $.get("./json", function (data) {
+      $("#faqs").empty();
+      for (let i = 0; i < data.length; i++) {
+        $("#faqs").append(
+          `<div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+            <h2 class="accordion-header" id="heading">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${i}" aria-expanded="true" aria-controls="collapse">
+                ${data[i].fields.question}
+              </button>
+            </h2>
+            <div id="collapse${i}" class="accordion-collapse collapse show" aria-labelledby="heading" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                ${data[i].fields.answer}
+              </div>
+            </div>
+          </div>`
+        );
+        $(`#delete-button-${i}`).attr("onclick", `deleteFaq(${data[i].pk})`);
+      }
+    });
+  }
+  showFaq();
+</script>
+
+{% endblock content %}

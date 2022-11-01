@@ -1,0 +1,131 @@
+{% extends 'base.html' %} {% block meta %}
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+  body {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background: rgb(207, 228, 228);
+  }
+  .container {
+    position: relative;
+    width: 100%;
+    max-width: 2040px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 12px 12px 12px grey;
+    padding: 20px 30px;
+  }
+  .row {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .card {
+    background: rgb(235, 235, 178);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  .card:hover {
+    background: rgb(207, 228, 228);
+  }
+  .a {
+    border: none;
+    outline: none;
+    height: 50px;
+    width: 200px;
+    background: none;
+    border-radius: 5px;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+  }
+  h1 {
+    position: relative;
+    font-size: 40px;
+    font-weight: 600;
+  }
+  h2 {
+    margin-top: 10px;
+    position: relative;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 32px;
+    color: black;
+    margin-left: 3px;
+    margin-right: 3px;
+  }
+  .pv {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: blue;
+    margin-left: 3px;
+    margin-right: 3px;
+  }
+
+  .pbv {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: red;
+    margin-left: 3px;
+    margin-right: 3px;
+  }
+
+  p {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    color: black;
+    margin-left: 3px;
+    margin-right: 3px;
+  }
+  .list-group-item.satu {
+    background: rgb(207, 241, 209);
+  }
+  .list-group-item.dua {
+    background: rgb(237, 195, 195);
+  }
+</style>
+{% endblock meta %} {% block content %}
+<body>
+  <section class="p-5">
+    <div class="container">
+      <div class="row text-center g-4">
+        <h1>Cek Kevalidan Product</h1>
+        {% for product in list_product %}
+        <div class="col-md-4">
+          <div class="card">
+            <h2 class="card-title">{{product.nama_produk}}</h2>
+            {% if product.is_valid %}
+            <h3 class="pv">Status: Produk Valid</h3>
+            {% else %}
+            <h3 class="pbv">Status: Produk Belum Valid</h3>
+            {% endif %}
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item satu">
+                <a href="{% url 'validasi:change_status' product.id %}" class="a">Change Status</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</body>
+
+{% endblock content %}
