@@ -1,8 +1,18 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from .forms import SignUpBuyerForm, SignUpSellerForm, LoginForm
-from django.contrib.auth import authenticate, login
+from .models import *
+from .forms import SignUpBuyerForm, SignUpSellerForm, LoginForm, DonasiForm
+from django.contrib.auth import authenticate, login, logout
+import json
+
 # Create your views here.
 
+def donasi_barang(request):
+    form = DonasiForm(request.POST)
+    if request.method == 'POST' and form.is_valid():
+        barang = form.cleaned_data['input_barang']
+        Donasi.objects.create(user=request.user, tipe=True, input_uang=0, input_barang=barang)
+    return render (request, 'donasi.html')
 
 def index(request):
     return render(request, 'index.html')
@@ -14,7 +24,7 @@ def registerbuyer(request):
         if form.is_valid():
             user = form.save()
             msg = 'user created'
-            return redirect('login_view')
+            return redirect('account:login_view')
         else:
             msg = 'form is not valid'
     else:
@@ -28,7 +38,7 @@ def registerseller(request):
         if form.is_valid():
             user = form.save()
             msg = 'user created'
-            return redirect('login_view')
+            return redirect('account:login_view')
         else:
             msg = 'form is not valid'
     else:
@@ -46,27 +56,28 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None and user.is_admin:
                 login(request, user)
-                return redirect('adminpage')
+                return redirect('account:adminpage')
             elif user is not None and user.is_buyer:
                 login(request, user)
-                return redirect('buyer')
+                return redirect('account:buyer')
             elif user is not None and user.is_seller:
                 login(request, user)
-                return redirect('seller')
+                return redirect('account:seller')
             else:
                 msg= 'Akun tidak ditemukan'
         else:
             msg = 'error validating form'
     return render(request, 'login.html', {'form': form, 'msg': msg})
 
-
 def admin(request):
-    return render(request,'admin.html')
-
+    return render(request,'show_admin.html')
 
 def buyer(request):
-    return render(request,'buyer.html')
-
+    return render(request,'show_pembeli.html')
 
 def seller(request):
-    return render(request,'seller.html')
+    return render(request,'show_penjual.html')
+
+def logout_user(request):
+    logout(request)
+    return redirect('account:index')
