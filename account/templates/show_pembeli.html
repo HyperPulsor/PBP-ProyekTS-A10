@@ -133,17 +133,19 @@
   </div>
   <div class="container-lg mt-4 justify-content-center align-item-center">
     <div class="row">
-      {% for cards in allCards %}
+      {% for kategori in kategori_item %}
       <div class="col-4 mt-4 mb-4">
         <div class="card text-center h-100">
-          <img src="{{cards.file_url}}" class="card-img-top" />
+          <img src="{{kategori.gambar}}" class="card-img-top" />
           <div class="card-body">
             <div class="card-title" style="text-align: left">
-              <h4 class="card-title">{{cards.name}}</h4>
+              <h4 class="card-title">{{kategori.nama}}</h4>
+              <h4 class="card-title">{{kategori.deskripsi}}</h4>
+              <h4 class="card-title">{{kategori.file_url}}</h4>
             </div>
           </div>
           <div class="card-footer">
-            <button class="btn btn-primary">Button</button>
+            <submit class="btn btn-primary" name="kategori_nama" value="{{kategori.nama}}"><a href="{% url 'katalog:show_toko' %}">Button</a></submit>
           </div>
         </div>
       </div>
