@@ -76,6 +76,12 @@
                                     </div>
                                     <!-- <h6 class="f-w-600">{{user.nama}}</h6> -->
                                     <h3 class="f-w-600">Nama User</h3>
+
+                                    <!-- <div class="m-b-25">
+                                        <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
+                                    </div> -->
+                                    <h5 class="f-w-600">Nama Usaha</h5>
+                                    <!-- <h3 class="f-w-600">{{user.namausaha}}</h3> -->
                                     <!-- <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i> -->
                                 </div>
                             </div>
@@ -84,41 +90,60 @@
                                     <h2 class="m-b-20 p-b-5 b-b-default f-w-600">Your Profile</h2>
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <h4 class="m-b-10 f-w-600">Username</h4>
-                                            <h5 class="text-muted f-w-400">{{user.username}}</h5>
+                                            <h5 class="m-b-10 f-w-600">Username</h5>
+                                            <h6 class="text-muted f-w-400">{{user.username}}</h6>
                                             <hr>
                                         </div>
                                         <div class="col-sm-6">
-                                            <h4 class="m-b-10 f-w-600">Email</h4>
-                                            <h5 class="text-muted f-w-400">{{user.email}}</h5>
+                                            <h5 class="m-b-10 f-w-600">Email</h5>
+                                            <h6 class="text-muted f-w-400">{{user.email}}</h6>
+                                            <hr>
+                                        </div>
+                                        <!-- <div class="col-sm-6">
+                                            <h5 class="m-b-10 f-w-600">Nama Usaha</h5>
+                                            <h6 class="text-muted f-w-400">{{user.namausaha}}</h6>
                                             <hr>
                                         </div>
                                         <div class="col-sm-6">
-                                            <h4 class="m-b-10 f-w-600">Nama Usaha</h4>
-                                            <h5 class="text-muted f-w-400">{{user.namausaha}}</h5>
+                                            <h5 class="m-b-10 f-w-600">Deskripsi</h5>
+                                            <h6 class="text-muted f-w-400">{{user.deskripsi}}</h6>
                                             <hr>
                                         </div>
                                         <div class="col-sm-6">
-                                            <h4 class="m-b-10 f-w-600">Deskripsi</h4>
-                                            <h5 class="text-muted f-w-400">{{user.deskripsi}}</h5>
+                                            <h5 class="m-b-10 f-w-600">Alamat</h5>
+                                            <h6 class="text-muted f-w-400">{{user.alamat}}</h6>
                                             <hr>
                                         </div>
                                         <div class="col-sm-6">
-                                            <h4 class="m-b-10 f-w-600">Alamat</h4>
-                                            <h5 class="text-muted f-w-400">{{user.alamat}}</h5>
+                                            <h5 class="m-b-10 f-w-600">Kontak</h5>
+                                            <h6 class="text-muted f-w-400">{{user.kontak}}</h6>
                                             <hr>
                                         </div>
                                         <div class="col-sm-6">
-                                            <h4 class="m-b-10 f-w-600">Kontak</h4>
-                                            <h5 class="text-muted f-w-400">{{user.kontak}}</h5>
+                                            <h5 class="m-b-10 f-w-600">Tautan Toko</h5>
+                                            <h6 class="text-muted f-w-400">{{user.linktoko}}</h6>
                                             <hr>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <h4 class="m-b-10 f-w-600">Tautan Toko</h4>
-                                            <h5 class="text-muted f-w-400">{{user.linktoko}}</h5>
-                                            <hr>
-                                        </div>
+                                        </div> -->
                                     </div>
+                                    <h2 class="m-b-20 p-b-5 b-b-default f-w-600">Data Usaha</h2>
+
+                                    <!-- <h5 class="f-w-600">Nama Usaha</h5> -->
+                                    <!-- <h3 class="f-w-600">{{user.namausaha}}</h3> -->
+
+                                    <!-- <h5 class="m-b-20 p-b-5 b-b-default f-w-600">Nama Toko</h5>
+                                    <h6 class="text-muted f-w-400">{{user.namausaha}}</h6> -->
+
+                                    <h5 class="m-b-20 p-b-5 f-w-600">Deskripsi</h5>
+                                    <h6 class="text-muted f-w-400">{{user.deskripsi}}</h6>
+
+                                    <h5 class="m-b-20 p-b-5 f-w-600">Alamat</h5>
+                                    <h6 class="text-muted f-w-400">{{user.alamat}}</h6>
+
+                                    <h5 class="m-b-20 p-b-5 f-w-600">Kontak</h5>
+                                    <h6 class="text-muted f-w-400">{{user.kontak}}</h6>
+
+                                    <h5 class="m-b-20 p-b-5 f-w-600">Tautan</h5>
+                                    <h6 class="text-muted f-w-400">{{user.linktoko}}</h6>
                                     
                                     
                                     <a class="btn btn-primary" href="/profile_handler/edit/seller/">Edit Profile</a>
@@ -136,6 +161,10 @@
 </html>
 
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+    *{
+        font-family: "Poppins", sans-serif;
+    }
     body {
     background-color: #f9f9fa
     }

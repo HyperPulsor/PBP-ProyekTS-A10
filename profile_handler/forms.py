@@ -1,13 +1,32 @@
-from django import forms
+# from django import forms
+from django import forms as auth_forms
 from account.forms import SignUpBuyerForm, SignUpSellerForm
 from account.models import User
-from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.forms import UserChangeForm, ReadOnlyPasswordHashField
 
 class BuyerEditProfileForm(UserChangeForm):
+    # password = auth_forms.ReadOnlyPasswordHashField(label="Password",
+    #     help_text="Raw passwords are not stored, so there is no way to see "
+    #             "this user's password, but you can change the password "
+    #             "using <a href=\"password/\">this form</a>.")
+
     class Meta:
         model = User
         # fields = ['nama','username','email','password']
+        # help_texts = {
+        #     'password ':(''),
+        # }
         fields = ['username', 'email']
+    
+    # def clean_password(self):
+    #     return self.initial["password"]
+
+    # def clean_password(self):
+    #     # Regardless of what the user provides, return the initial value.
+    #     # This is done here, rather than on the field, because the
+    #     # field does not have access to the initial value
+    #     return self.initial["password"]
+        
 
 class SellerEditProfileForm(UserChangeForm):
     class Meta:

@@ -44,26 +44,26 @@
                             </div>
                             <div class="col-sm-8">
                                 <div class="card-block">
-                                    <h2 class="m-b-20 p-b-5 b-b-default f-w-600">Your Profile</h2>
+                                    <h3 class="m-b-20 p-b-5 b-b-default f-w-600">Your Profile</h3>
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <h4 class="m-b-10 f-w-600">Username</h4>
-                                            <h5 class="text-muted f-w-400">{{user.username}}</h5>
+                                            <h5 class="m-b-10 f-w-600">Username</h5>
+                                            <h6 class="text-muted f-w-400">{{user.username}}</h6>
                                             <hr>
                                         </div>
                                         <div class="col-sm-6">
-                                            <h4 class="m-b-10 f-w-600">Email</h4>
-                                            <h5 class="text-muted f-w-400">{{user.email}}</h5>
+                                            <h5 class="m-b-10 f-w-600">Email</h5>
+                                            <h6 class="text-muted f-w-400">{{user.email}}</h6>
                                             <hr>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <!-- <div class="row">
                                         <div class="col-sm-6">
                                             <h4 class="m-b-10 f-w-600">Your Likes</h4>
-                                            <h5 class="text-muted f-w-400">0</h5>
+                                            <h6 class="text-muted f-w-400">0</h6>
                                             <hr>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!-- <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Your Likes</h6>
                                     <div class="row">
                                         <div class="col-sm-6">
@@ -95,8 +95,12 @@
 </html>
 
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+    *{
+        font-family: "Poppins", sans-serif;
+    }
     body {
-    background-color: #f9f9fa
+        background-color: #f9f9fa
     }
 
     .padding {
