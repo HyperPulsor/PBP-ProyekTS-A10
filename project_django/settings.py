@@ -46,8 +46,8 @@ INSTALLED_APPS = [
     'validasiproduct',
     'forum',
     'katalog',
-    'landing',
-]
+    'landing',]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

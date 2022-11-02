@@ -39,7 +39,7 @@
     </div>
   </div>
   <div class="container d-flex mt-5 justify-content-center align-item-center">
-    <img src="{% static 'images/main-pic.jpg'%}" alt="top-pic" />
+    <img class = "img-fluid img-responsive" src="{% static 'images/5.jpg'%}" alt="top-pic" />
   </div>
   <div class="container-lg mt-5 mb-2 mr-3">
     <h4 style="text-align: center">SELAMAT DATANG DI</h4>
@@ -136,16 +136,16 @@
       {% for kategori in kategori_item %}
       <div class="col-4 mt-4 mb-4">
         <div class="card text-center h-100">
-          <img src="{{kategori.gambar}}" class="card-img-top" />
+          <img src="{% static '/images/5.jpg' %}" class="card-img-top" />
           <div class="card-body">
             <div class="card-title" style="text-align: left">
-              <h4 class="card-title">{{kategori.nama}}</h4>
-              <h4 class="card-title">{{kategori.deskripsi}}</h4>
-              <h4 class="card-title">{{kategori.file_url}}</h4>
+              <h4 class="card-title"><b>{{kategori.nama}}</b></h4>
+              <h5 class="card-title">{{kategori.deskripsi}}</h5>
+              <h6 class="card-title">{{kategori.file_url}}</h6>
             </div>
           </div>
           <div class="card-footer">
-            <submit class="btn btn-primary" ><a href="{% url 'katalog:show_toko_kategori' kategori.nama kategori.deskripsi %}" class="link-light">Button</a></submit>
+            <submit class="btn btn-primary" ><a href="{% url 'katalog:show_toko_kategori' kategori.nama kategori.deskripsi %}" class="link-light">Lihat Toko</a></submit>
           </div>
         </div>
       </div>
