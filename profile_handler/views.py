@@ -4,14 +4,16 @@ from django.http.response import HttpResponse
 from account.forms import SignUpBuyerForm
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView
-# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.views import generic
 
-from account.models import User
 from account.forms import *
 
 from .forms import *
+
+from profile_handler.models import Profile
+from account.models import User
 
 # Create your views here.
 # def show_buyer(request):
@@ -42,7 +44,7 @@ from .forms import *
 #     response = {'users':users}
 #     return render(request, 'buyer-profile.html', response)
 
-# @login_required(login_url='/account/login/')
+@login_required(login_url='/account/login/')
 def show_profile(request):
     if not request.user.is_authenticated:
         return redirect("account/login/") 

@@ -1,72 +1,5 @@
-<!-- <!DOCTYPE html>
-
-<html lang="en" dir="ltr">
-    <head>
-        <title>Edit Profile</title>
-    </head>
-
-    <body>
-        <h1>Edit Your Profile<h1>
-        <hr>
-        <form action="" method="POST" }>
-            {% csrf_token %}
-            <label for="nama">Nama: </label>
-            <input name="nama" type="text" required class="form-control" id="nama" placeholder="Masukkan nama Anda...">
-            <br>
-            <label for="username">Username: </label>
-            <input name="username" type="text" required class="form-control" id="username" placeholder="Masukkan username baru Anda...">
-            <br>
-            <label for="email">Email: </label>
-            <input name="email" type="text" required class="form-control" id="email" placeholder="Masukkan email Anda...">
-            <br>
-            <label for="password">Password: </label>
-            <input name="password" type="text" required class="form-control" id="password" placeholder="Masukkan password baru Anda...">
-            <br>
-            <label for="namausaha">Nama Usaha: </label>
-            <input name="namausaha" type="text" required class="form-control" id="namausaha" placeholder="Masukkan nama usaha Anda...">
-            <br>
-            <label for="deskripsi">Deskripsi: </label>
-            <input name="deskripsi" type="text" required class="form-control" id="deskripsi" placeholder="Masukkan deskripsi singkat usaha Anda...">
-            <br>
-            <label for="alamat">Alamat: </label>
-            <input name="alamat" type="text" required class="form-control" id="alamat" placeholder="Masukkan alamat usaha Anda...">
-            <br>
-            <label for="kontak">Kontak: </label>
-            <input name="kontak" type="text" required class="form-control" id="kontak" placeholder="Masukkan kontak Anda...">
-            <br>
-            <label for="linktoko">Tautan Toko: </label>
-            <input name="linktoko" type="text" required class="form-control" id="linktoko" placeholder="Masukkan tautan toko Anda...">
-            <br>
-            <input class="save btn btn-outline-success btn-form" type="submit" value="SAVE">
-        </form>
-        </div>
-    </body>
-</html> -->
-
-
-<!-- <!DOCTYPE html>
-
-<html lang="en" dir="ltr">
-    <head>
-        <title>Edit Profile</title>
-    </head>
-
-    <body>
-        <h1>Edit Your Profile<h1>
-        <hr>
-        <form action="" method="POST"}>
-            {% csrf_token %}
-            {{ form.as_p }}
-            <a class="edit-password" href="/profile_handler/edit/password/">Change Password</a> -->
-            <!-- <hr> -->
-            <!-- <input class="save btn btn-outline-success btn-form" type="submit" value="Save">
-        </form>
-        </div>
-    </body>
-</html> --> 
-
+{% load static %}
 <!DOCTYPE html>
-<!-- {% url 'profile:showbuyer' %} -->
 
 <html lang="en" dir="ltr">
     <head>
@@ -75,26 +8,60 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-        
+        <link rel="stylesheet" href="{% static 'edits.css' %}">
         <title>Edit Profile</title>
     </head>
 
     <body>
-        <div class="container rounded bg-white mt-5 mb-5">
+        <div class="navbar navbar-light navbar-expand-lg bg-primary">
+            <div class="container-fluid" id="container-navbar">
+              <div class="navbar-brand mx-5">
+                <a href="#" style="color: white; text-decoration: none">MedsosUMKM</a>
+              </div>
+              <div class="container-flex justify-content-space-between mx-5">
+                <a
+                  href="{% url 'account:seller' %}"
+                  class="mx-2"
+                  style="color: white; text-decoration: none; text-align: right"
+                  >Home</a
+                >
+                <a
+                  href=""
+                  class="mx-2"
+                  style="color: white; text-decoration: none; text-align: right"
+                  >Catalog</a
+                >
+                <a
+                  href="/profile_handler/"
+                  class="mx-2"
+                  style="color: white; text-decoration: none; text-align: right"
+                  >Profile</a
+                >
+                <a role="button" href="{% url 'account:logout' %}" class="btn btn-light mx-2" style="text-align: right"
+                  >Logout</a
+                >
+              </div>
+            </div>
+        </div>
+
+        <div class="container rounded bg-white mt-5 mb-5 shadow-lg p-3 mb-5 bg-white rounde">
             <div class="row">
                 <div class="col-10 offset-1">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div class="row">
-                            <h2 class="text-center">Edit Your Profile</h2>
-                            <div class="text">
-                            <hr>
-                            <form action="" method="POST">
-                                {% csrf_token %}
-                                {{ form.as_p }}
-                                <hr>
-                                <input class="save btn btn-primary btn-form" type="submit" value="Save">
-                            </form>
+                            <div class="row">
+        
+                                <h2 class="text-center">Edit Your Profile</h2>
+                                <div class="text">
+                                    <hr>
+                                    <form action="" method="POST">
+                                        {% csrf_token %}
+                                        {{ form.as_p }}
+                                        <hr>
+                                        <input class="save btn btn-primary btn-form" type="submit" value="Save">
+                                    </form>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -103,18 +70,3 @@
         </div>
     </body>
 </html>
-
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
-    *{
-        font-family: "Poppins", sans-serif;
-    }
-    body {
-    background: -webkit-gradient(linear, left top, right top, from(#3193d5), to(#405ad9));
-    background: linear-gradient(to right, #566fd3, #7ec4ef);
-    }
-
-    .text{
-        text-align: left;
-    }
-</style>
