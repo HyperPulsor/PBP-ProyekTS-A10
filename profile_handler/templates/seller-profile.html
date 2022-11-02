@@ -1,0 +1,300 @@
+{% extends 'base.html' %} {% load static %}
+{% block content %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Profile</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" rel="stylesheet">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+            *{
+                font-family: "Poppins", sans-serif;
+            }
+            body {
+            background-color: #f9f9fa
+            }
+            .padding {
+                padding: 3rem !important
+            }
+            .user-card-full {
+                overflow: hidden;
+            }
+            .card {
+                border-radius: 5px;
+                -webkit-box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
+                box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
+                border: none;
+                margin-bottom: 30px;
+            }
+            .m-r-0 {
+                margin-right: 0px;
+            }
+            .m-l-0 {
+                margin-left: 0px;
+            }
+            .user-card-full .user-profile {
+                border-radius: 5px 0 0 5px;
+            }
+            .bg-c-lite-green {
+                background: linear-gradient(to right, #2196F3, white);
+            }
+            .user-profile {
+                padding: 20px 0;
+            }
+            .card-block {
+                padding: 1.25rem;
+            }
+            .m-b-25 {
+                margin-bottom: 25px;
+            }
+            .img-radius {
+                border-radius: 5px;
+            }
+            h6 {
+                font-size: 14px;
+            }
+            .card .card-block p {
+                line-height: 25px;
+            }
+        
+            @media only screen and (min-width: 1400px){
+                p {
+                    font-size: 14px;
+                }
+            }
+            .card-block {
+                padding: 1.25rem;
+            }
+            .b-b-default {
+                border-bottom: 1px solid #e0e0e0;
+            }
+            .m-b-20 {
+                margin-bottom: 20px;
+            }
+            .p-b-5 {
+                padding-bottom: 5px !important;
+            }
+            .card .card-block p {
+                line-height: 25px;
+            }
+            .m-b-10 {
+                margin-bottom: 10px;
+            }
+            .text-muted {
+                color: #919aa3 !important;
+            }
+            .b-b-default {
+                border-bottom: 1px solid #e0e0e0;
+            }
+            .f-w-600 {
+                font-weight: 600;
+            }
+            .m-b-20 {
+                margin-bottom: 20px;
+            }
+            .m-t-40 {
+                margin-top: 20px;
+            }
+            .p-b-5 {
+                padding-bottom: 5px !important;
+            }
+            .m-b-10 {
+                margin-bottom: 10px;
+            }
+            .m-t-40 {
+                margin-top: 20px;
+            }
+            .user-card-full .social-link li {
+                display: inline-block;
+            }
+            .user-card-full .social-link li a {
+                font-size: 20px;
+                margin: 0 10px 0 0;
+                -webkit-transition: all 0.3s ease-in-out;
+                transition: all 0.3s ease-in-out;
+            }
+
+            .landing-page a {
+            color: white;
+            text-decoration: none;
+            }
+
+            .landing-page p {
+            color: black;
+            }
+
+            .landing-page #left-nav a {
+            color: white;
+            text-decoration: none;
+            text-align: right;
+            }
+
+            .landing-page #left-nav a#login {
+            color: black;
+            text-align: right;
+            }
+
+            .card{
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            border-radius: 10px;
+            margin: 25px;
+            color: black;
+            }
+
+            .card:hover{
+            box-shadow: 0 8px 16px 0 #6f9cde;
+            }
+        </style>
+    </head>
+
+    <body class="landing-page">
+        {% if user.is_authenticated %}
+        <div class="navbar navbar-light navbar-expand-lg bg-primary">
+            <div class="container-fluid" id="navbar">
+              <div class="navbar-brand mx-5" id="logo">
+                <img
+                  src="{% static 'images/logo2.png' %}"
+                  width="30"
+                  height="30"
+                  class="d-inline-block align-top"
+                  alt=""
+                />
+                <a href="#" id="logo-text">MedsosUMKM</a>
+              </div>
+              <div class="container-flex justify-content-space-between mx-5" id="left-nav">
+                <a
+                  href="{% url 'account:buyer' %}"
+                  class="mx-2"
+                  >Home</a
+                >
+                <a
+                  href="/profile_handler/"
+                  class="mx-2"
+                  >Profile</a
+                >
+                <a
+                  href="/forum/semua/"
+                  class="mx-2"
+                  >Forums</a
+                >
+                <a
+                  role="button"
+                  href="{% url 'account:logout' %}"
+                  class="btn btn-light mx-2"
+                  id="login"
+                  >Logout</a
+                >
+              </div>
+            </div>
+          </div>
+
+        <div class="page-content page-container" style="margin: auto" id="page-content">
+            <div class="padding">
+                <div class="row container d-flex justify-content-center">
+                    <div class="col-8 offset-3">
+                        <div class="card user-card-full">
+                            <div class="row m-l-0 m-r-0">
+                                <div class="col-sm-4 bg-c-lite-green user-profile">
+                                    <div class="card-block text-center text-white">
+                                        <div class="m-b-25">
+                                            <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
+                                        </div>
+                                        <!-- <h6 class="f-w-600">{{user.nama}}</h6> -->
+                                        <h3 class="f-w-600" style="text-shadow: 2px 2px 5px rgb(37, 77, 109);">Nama User</h3>
+                                        <!-- <h3 class="f-w-600" style="text-shadow: 2px 2px 5px rgb(37, 77, 109);">{{user.name}}</h3> -->
+
+                                        <h5 class="f-w-600" style="text-shadow: 2px 2px 5px rgb(37, 77, 109);">Nama Usaha</h5>
+                                        <!-- <h5 class="f-w-600" style="text-shadow: 2px 2px 5px rgb(37, 77, 109);">{{user.namausaha}}</h5> -->
+                                        <!-- <h3 class="f-w-600">{{user.namausaha}}</h3> -->
+                                        <!-- <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i> -->
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <div class="card-block">
+                                        <h2 class="m-b-20 p-b-5 b-b-default f-w-600">Your Profile</h2>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <h5 class="m-b-10 f-w-600">Username</h5>
+                                                <h6 class="text-muted f-w-400">{{user.username}}</h6>
+                                                <hr>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <h5 class="m-b-10 f-w-600">Email</h5>
+                                                <h6 class="text-muted f-w-400">{{user.email}}</h6>
+                                                <hr>
+                                            </div>
+                                            <!-- <div class="col-sm-6">
+                                                <h5 class="m-b-10 f-w-600">Deskripsi</h5>
+                                                <h6 class="text-muted f-w-400">Your store description will show here...</h6>
+                                                <hr>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <h5 class="m-b-10 f-w-600">Alamat</h5>
+                                                <h6 class="text-muted f-w-400">Your store address will show here...</h6>
+                                                <hr>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <h5 class="m-b-10 f-w-600">Kontak</h5>
+                                                <h6 class="text-muted f-w-400">Your contact will show here...</h6>
+                                                <hr>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <h5 class="m-b-10 f-w-600">Tautan Toko</h5>
+                                                <h6 class="text-muted f-w-400">Your business link will show here...</h6>
+                                                <hr>
+                                            </div>
+                                        </div> -->
+
+                                        <h2 class="m-b-20 p-b-5 b-b-default f-w-600">Data Usaha</h2>
+
+                                        <!-- <h5 class="f-w-600">Nama Usaha</h5> -->
+                                        <!-- <h3 class="f-w-600">{{user.namausaha}}</h3> -->
+
+                                        <!-- <h5 class="m-b-20 p-b-5 b-b-default f-w-600">Nama Toko</h5>
+                                        <h6 class="text-muted f-w-400">{{user.namausaha}}</h6> -->
+
+                                        <h5 class="m-b-20 f-w-600">Deskripsi</h5>
+                                        <h6 class="text-muted f-w-400 p-b-5">Your store description will show here...</h6>
+                                        <!-- <h6 class="text-muted f-w-400">{{user.deskripsi}}</h6> -->
+
+                                        <h5 class="m-b-20 f-w-600">Alamat</h5>
+                                        <h6 class="text-muted f-w-400 p-b-5">Your store address will show here...</h6>
+                                        <!-- <h6 class="text-muted f-w-400">{{user.alamat}}</h6> -->
+
+                                        <h5 class="m-b-20 f-w-600">Kontak</h5>
+                                        <h6 class="text-muted f-w-400 p-b-5">Your contact will show here...</h6>
+                                        <!-- <h6 class="text-muted f-w-400">{{user.kontak}}</h6> -->
+
+                                        <h5 class="m-b-20 f-w-600">Tautan</h5>
+                                        <h6 class="text-muted f-w-400 p-b-5">Your business link will show here...</h6>
+                                        <!-- <h6 class="text-muted f-w-400">{{user.linktoko}}</h6> -->
+                                        
+                                        <a class="btn btn-primary" href="/profile_handler/edit/seller/">Edit Profile</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <script>
+            function handle() {
+                $.ajax({
+                    url: "/profile_handler/edit/buyer/",
+                    type: "",
+                })
+            }
+        </script>
+
+    </body>
+</html>
+{% endblock content %}

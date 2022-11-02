@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'forum',
     'katalog',
     'landing',
+    'profile_handler',
 ]
 
 MIDDLEWARE = [

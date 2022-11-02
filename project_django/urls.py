@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+import profile_handler.urls as profile_handler
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -27,5 +28,6 @@ urlpatterns = [
     path('addkategori/', include('addkategori.urls')),
     path('', include('account.urls')),
     path('forum/', include('forum.urls')),
+    path('profile_handler/', include(profile_handler)),
     path('katalog/', include('katalog.urls')),
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
