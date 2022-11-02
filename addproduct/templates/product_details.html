@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>eCommerce Product Detail</title>
+    <link href="https://fonts.google.com/specimen/Poppins" rel="stylesheet">
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  </head>
+
+    <body>
+        <div class="text-center">
+          <a href="/addproduct/katalog/add" >
+           < Kembali
+          </a>
+      
+       
+        </div>
+    <!--Main layout-->
+    <main class="mt-5 pt-4">
+      <div class="container dark-grey-text mt-5">
+    
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+    
+          <!--Grid column-->
+          <div class="col-md-6 mb-4">
+            <img src="{{product.gambar_product}}" class="img-fluid" alt="">
+    
+          </div>
+          <!--Grid column-->
+    
+          <!--Grid column-->
+          <div class="col-md-6 mb-4">
+    
+            <!--Content-->
+            <div class="p-4">
+    
+              <div class="mb-3">
+                  <span class="badge badge-pill badge-warning">{{product.kategori_produk}}</span>
+              </div>
+              
+              <h3>{{product.nama_produk}}</h3>
+              <p class="lead">
+                <span>Rp{{product.harga_produk}},-</span>
+              </p>
+    
+              <p>{{product.deskripsi_produk}}</p>
+    
+              <form class="d-flex justify-content-left">
+              
+                <button type="button" class="btn btn-info">
+                  <a href="{{product.link_produk}}" style="color:white; text-decoration: None;" target=”_blank”>
+                    Beli Produk
+                  </a> 
+              </button>
+
+    
+              </form>
+    
+            </div>
+            <!--Content-->
+    
+          </div>
+          <!--Grid column-->
+    
+        </div>
+        <!--Grid row-->
+    
+        <hr>
+    
+    
+      </div>
+    </main>
+    <!--Main layout-->
+
+  </body>
+</html>

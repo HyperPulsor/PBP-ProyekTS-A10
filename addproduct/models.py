@@ -1,5 +1,8 @@
 from email.policy import default
 from django.db import models
+from django.contrib.auth.models import User
+
+# https://medium.com/ibisdev/upload-multiple-images-to-a-model-with-django-fd00d8551a1c
 from account.models import User
 
 class MultiImage(models.Model):
@@ -15,17 +18,41 @@ class Image(models.Model):
     width = models.FloatField(default=100)
     length = models.FloatField(default=100)
 
-class Product(MultiImage):
-    id_toko = models.IntegerField(default=0)
-    like = models.IntegerField(default=0)
-    name = models.CharField(max_length=255)
-    nama_produk = models.CharField(max_length=255)
-    kategori_produk = models.CharField(max_length=255)
-    harga_produk = models.IntegerField()
-    gambar_produk = models.ImageField()
-    deskripsi_produk = models.CharField(max_length=255)
-    link_produk = models.TextField()
-    is_valid = models.BooleanField()
+class Product(models.Model):
+    Makanan = 'Makanan'
+    Pakaian = 'Pakaian'
+    Perlengkapan_Rumah_Tangga = 'Perlengkapan Rumah Tangga'
+    Otomotif = 'Otomotif'
+    Alat_Tulis_Kantor = 'Alat Tulis Kantor'
+    Kesehatan = 'Kesehatan'
+    Kecantikan = 'Kecantikan'
+    Alat_Musik = 'Alat Musik'
+    Gadget = 'Gadget'
+    Aksesoris = 'Aksesoris'
+    Footwear = 'Footwear'
+    Tas = 'Tas'
+
+
+    Options_Kategori = [
+        (Makanan, 'Makanan'),
+        (Pakaian, 'Pakaian'),
+        (Perlengkapan_Rumah_Tangga, 'Perlengkapan Rumah Tangga'),
+        (Otomotif, 'Otomotif'),
+        (Alat_Tulis_Kantor, 'Alat Tulis Kantor'),
+        (Kesehatan,'Kesehatan'),
+        (Kecantikan, 'Kecantikan'),
+        (Alat_Musik, 'Alat Musik'),
+        (Gadget, 'Gadget'),
+        (Aksesoris, 'Aksesoris'),
+        (Footwear, 'Footwear'),
+        (Tas, 'Tas'),
+        
+    ]
+
+
+
+
+
 
 
 

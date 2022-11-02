@@ -1,5 +1,9 @@
 body {
+<<<<<<< HEAD
+  font-family: "Poppins", sans-serif;
+=======
   font-family: "Roboto", sans-serif;
+>>>>>>> 3141d3d85fd05be510a87837a2e96bda38670caf
   background-color: #f8fafb; }
 
 p {
@@ -8,6 +12,20 @@ p {
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
+<<<<<<< HEAD
+  font-family: "Poppins", sans-serif; }
+
+a {
+  color: white;
+  -webkit-transition: .3s all ease;
+  -o-transition: .3s all ease;
+  transition: .3s all ease; }
+  
+  a:hover {
+    text-decoration: none !important; 
+    color: white;
+  }
+=======
   font-family: "Roboto", sans-serif; }
 
 a {
@@ -16,6 +34,7 @@ a {
   transition: .3s all ease; }
   a:hover {
     text-decoration: none !important; }
+>>>>>>> 3141d3d85fd05be510a87837a2e96bda38670caf
 
 .content {
   padding: 7rem 0; }
@@ -206,3 +225,7 @@ h2 {
 .control--checkbox input:disabled:checked ~ .control__indicator {
   background-color: #7e0cf5;
   opacity: .2; }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 3141d3d85fd05be510a87837a2e96bda38670caf

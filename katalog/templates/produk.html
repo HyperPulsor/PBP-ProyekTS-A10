@@ -1,11 +1,28 @@
+<<<<<<< HEAD
+{% load static %}
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+        <style>
+            body {
+                font-family: 'Poppins';font-size: 22px;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+=======
 {% extends 'base.html' %} {% load static %} {% block content %}
 <html>
     <head>
+>>>>>>> 3141d3d85fd05be510a87837a2e96bda38670caf
         <script>
             function myFunction() {
               alert("Item telah dimasukan ke bookmark!");
             }
         </script>
+<<<<<<< HEAD
+=======
         <script>
             $('#form').submit((e) => {
           e.preventDefault()
@@ -25,6 +42,7 @@
           })
         })
         </script>
+>>>>>>> 3141d3d85fd05be510a87837a2e96bda38670caf
     </head>
 
     <body>
@@ -36,6 +54,28 @@
                 <h1> produk dari toko {{nama_toko}}</h1>
             </div>
             
+<<<<<<< HEAD
+            <div class="row">
+                {% for produk in list_produk %}
+                <div class="col mt-2 ml-2 mb-2 mr-2">
+                    <div class="card text-white bg-light" style="width: 18rem;">
+                        <div class="container" style="color:black">
+                            <div class="card-body flex-column">
+                                <img class="img-fluid pt-3" src="{% static 'kategori/images/2.jpg' %}" alt="Gambar toko">
+                                <div class="text-center">
+                                    <h5 class="namaToko pt-4"><b>{{produk.namaProduk}}</b></h4>
+                                </div>
+                                <h7 class="deskripsi">{{produk.deskripsi}}</h5> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>
+=======
             <div class="container-lg mt-4 justify-content-center align-item-center">
                 <div class="row">
                 {% for produk in list_produk %}
@@ -65,3 +105,4 @@
     </body>
 </html>
 {% endblock content %}
+>>>>>>> 3141d3d85fd05be510a87837a2e96bda38670caf
