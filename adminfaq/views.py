@@ -15,7 +15,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 def show_faq(request):
     form = FormFaq()
-    data = Faq.objects.filter(user=request.user)
+    data = Faq.objects.all()
     context = {
         'title' : 'Frequently Asked Question',
         'faq' : data,

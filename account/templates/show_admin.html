@@ -1,7 +1,63 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="{% static 'js/donasi.js' %}"></script>
+  <script>
+    function createFaq() {
+      $.post({
+        url: `/adminfaq/create_faq/`,
+        type: "post",
+        data: {
+          question: $("#question-controller").val(),
+          answer: $("#answer-controller").val(),
+        },
+        success: showFaq,
+      });
+    }
+    $(`#save-faq`).attr("onclick", `createFaq()`);
+  
+    function deleteFaq(pk) {
+      $.post({
+        url: `/adminfaq/delete_faq/${pk}/`,
+        type: "post",
+        data: {},
+        success: showFaq,
+      });
+    }
+  
+    function showFaq() {
+      $.get("/adminfaq/json", function (data) {
+        $("#faqs").empty();
+        for (let i = 0; i < data.length; i++) {
+          $("#faqs").append(
+            `<div class="accordion" id="accordionExample">
+              <div class="accordion-item">
+              <h2 class="accordion-header" id="heading">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${i}" aria-expanded="true" aria-controls="collapse">
+                  ${data[i].fields.question}
+                </button>
+              </h2>
+              <div id="collapse${i}" class="accordion-collapse collapse show" aria-labelledby="heading" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  ${data[i].fields.answer}
+                </div>
+                <button type="button" onclick="" id="delete-button-${i}" class="button">Delete FAQ</button>
+              </div>
+            </div>`
+          );
+          $(`#delete-button-${i}`).attr("onclick", `deleteFaq(${data[i].pk})`);
+        }
+      });
+    }
+    showFaq();
+  </script>
+  
   <style>
+    #faqs {
+      padding-right: 200px;
+      padding-left: 200px;
+    }
+  
     .landing-page a {
       color: white;
       text-decoration: none;
@@ -64,6 +120,26 @@
           class="mx-2"
           >Forums</a
         >
+        <a 
+        href="{% url 'validasi:product_invalid' %}" 
+        class="mx-2" 
+        style="color: white; text-decoration: none; text-align: right"
+        >
+        Validasi Product</a
+        >
+        <a 
+        href="{% url 'kategori:create_kategori' %}" 
+        class="mx-2" 
+        style="color: white; text-decoration: none; text-align: right">
+        Add Kategori</a
+        >
+        <a 
+        role="button" 
+        href="{% url 'faq:show_faq' %}" 
+        class="mx-2" 
+        style="text-align: right; color: white">
+        Add Faq</a
+        >
         <a
           role="button"
           href="{% url 'account:logout' %}"
@@ -74,6 +150,35 @@
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add FAQ</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <form method="POST" action="">
+            {% csrf_token %}
+            <div class="mt-4">
+              <label for="question">Question</label>
+            </div>
+            <input id="question-controller" name="question" placeholder="New Question" required class="form-control" />
+            <div class="mt-4">
+              <label for="answer">Answer</label>
+            </div>
+            <textarea id="answer-controller" name="answer" placeholder="Answer" cols="30" rows="10" required class="form-control"></textarea>
+            <div class="modal-footer">
+              <button id="save-faq" class="btn btn-primary" value="Submit" onclick="">Add</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="container d-flex mt-5 justify-content-center align-item-center">
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-interval="500">
       <div class="carousel-inner">
@@ -179,126 +284,31 @@
       {% for kategori in kategori_item %}
       <div class="col-4 mt-4 mb-4">
         <div class="card text-center h-100">
-          <img src="{{kategori.gambar}}" class="card-img-top" />
+          <img src="{{kategori.file_url}}" alt="" width="200" height="200" class="card-img-top" />
           <div class="card-body">
-            <div class="card-title" style="text-align: left">
-              <h4 class="card-title">{{kategori.nama}}</h4>
-              <h4 class="card-title">{{kategori.deskripsi}}</h4>
-              <h4 class="card-title">{{kategori.file_url}}</h4>
+            <div class="card-title" style="text-align: center">
+              <h4 class="card-title"><b>{{kategori.nama}}</b></h4>
+              <h5 class="card-title" style="color: blue">{{kategori.deskripsi}}</h5>
+              <button class="btn btn-secondary;"><a href="{% url 'kategori:delete_kategori' kategori.id %}">Delete Kategori</a></button>
             </div>
           </div>
           <div class="card-footer">
-            <submit class="btn btn-primary" ><a href="{% url 'katalog:show_toko_kategori' kategori.nama kategori.deskripsi %}" class="link-light">Button</a></submit>
+            <submit class="btn btn-primary"><a href="{% url 'katalog:show_toko_kategori' kategori.nama kategori.deskripsi %}" class="link-light">Lihat Toko</a></submit>
           </div>
         </div>
       </div>
       {% endfor %}
     </div>
   </div>
+
   <div
     class="container d-flex justify-content-center align-item-center text-align-center mt-5 mb-2"
   >
     <h4>FAQ</h4>
   </div>
-  <div
-    class="container-lg justify-content-center align-item-center text-align-center"
-  >
-    <div class="accordion" id="accordionExample">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
-          <button
-            class="accordion-button"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseOne"
-            aria-expanded="true"
-            aria-controls="collapseOne"
-          >
-            Question #1
-          </button>
-        </h2>
-        <div
-          id="collapseOne"
-          class="accordion-collapse collapse show"
-          aria-labelledby="headingOne"
-          data-bs-parent="#accordionExample"
-        >
-          <div class="accordion-body">
-            <strong>This is the first item's accordion body.</strong> It is
-            shown by default, until the collapse plugin adds the appropriate
-            classes that we use to style each element. These classes control the
-            overall appearance, as well as the showing and hiding via CSS
-            transitions. You can modify any of this with custom CSS or
-            overriding our default variables. It's also worth noting that just
-            about any HTML can go within the <code>.accordion-body</code>,
-            though the transition does limit overflow.
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingTwo">
-          <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseTwo"
-            aria-expanded="false"
-            aria-controls="collapseTwo"
-          >
-            Question #2
-          </button>
-        </h2>
-        <div
-          id="collapseTwo"
-          class="accordion-collapse collapse"
-          aria-labelledby="headingTwo"
-          data-bs-parent="#accordionExample"
-        >
-          <div class="accordion-body">
-            <strong>This is the second item's accordion body.</strong> It is
-            hidden by default, until the collapse plugin adds the appropriate
-            classes that we use to style each element. These classes control the
-            overall appearance, as well as the showing and hiding via CSS
-            transitions. You can modify any of this with custom CSS or
-            overriding our default variables. It's also worth noting that just
-            about any HTML can go within the <code>.accordion-body</code>,
-            though the transition does limit overflow.
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingThree">
-          <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseThree"
-            aria-expanded="false"
-            aria-controls="collapseThree"
-          >
-            Question #3
-          </button>
-        </h2>
-        <div
-          id="collapseThree"
-          class="accordion-collapse collapse"
-          aria-labelledby="headingThree"
-          data-bs-parent="#accordionExample"
-        >
-          <div class="accordion-body">
-            <strong>This is the third item's accordion body.</strong> It is
-            hidden by default, until the collapse plugin adds the appropriate
-            classes that we use to style each element. These classes control the
-            overall appearance, as well as the showing and hiding via CSS
-            transitions. You can modify any of this with custom CSS or
-            overriding our default variables. It's also worth noting that just
-            about any HTML can go within the <code>.accordion-body</code>,
-            though the transition does limit overflow.
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
+  <div id="faqs"></div>
+
   <div
     class="container-lg justify-content-center align-item-center text-align-center mt-5 mb-2"
   >

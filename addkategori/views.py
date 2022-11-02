@@ -13,8 +13,7 @@ from django.contrib import messages
 
 def show_kategori(request):
     form = FormKategori()
-    # data = Kategori.objects.all()
-    data = Kategori.objects.filter(user=request.user)
+    data = Kategori.objects.all()
     context = {
         'title' : 'Kategori Product',
         'list_kategori' : data,
@@ -33,7 +32,7 @@ def create_kategori(request):
         file = fss.save(gambar.name, gambar)
         file_url = fss.url(file)
         if nama != "" and deskripsi != "":
-            Kategori.objects.create(deskripsi=deskripsi, nama=nama, user=user, gambar=gambar, file_url=file_url)
+            Kategori.objects.create(deskripsi=deskripsi, nama=nama, gambar=gambar, file_url=file_url)
             return redirect('kategori:show_kategori')
         else:
             list(messages.get_messages(request))
