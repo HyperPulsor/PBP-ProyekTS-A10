@@ -12,6 +12,7 @@ urlpatterns = [
     path('katalog/add/', views.show_product, name='show_product'), 
     path('details/',views.product_details, name='product_details'),
     path('show_details/<int:id>/',views.show_details, name='show_details'),
+     path('delete_product/<int:id>/', views.delete_product, name="delete_product"),
    
 ]
 

@@ -113,17 +113,13 @@ def show_details(request, id):
         raise Http404('Produk tidak ada')
             
 
-# def product_details(request, id):
-#     product = Product.objects.filter(is_valid=True)
-#     response = {
-#         'details' : product
-#     }
-#     return render(request, 'product_details.html', response)
-
 def product_details(request):
-    response = HttpResponseRedirect(reverse("addproduct:show_details"))
+    return HttpResponseRedirect(reverse("addproduct:show_details"))
 
-    return response
+def delete_product(request, id):
+    product = Product.objects.get( pk = id)
+    product.delete()
+    return redirect('addproduct:show_product')
 
 
 
