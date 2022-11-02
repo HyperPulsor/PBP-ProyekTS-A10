@@ -1,6 +1,5 @@
 # from django import forms
 from django import forms as auth_forms
-from account.forms import SignUpBuyerForm, SignUpSellerForm
 from account.models import User
 from django.contrib.auth.forms import UserChangeForm, ReadOnlyPasswordHashField
 
@@ -16,7 +15,7 @@ class BuyerEditProfileForm(UserChangeForm):
         # help_texts = {
         #     'password ':(''),
         # }
-        fields = ['username', 'email']
+        fields = ['name', 'username', 'email']
     
     # def clean_password(self):
     #     return self.initial["password"]
@@ -31,8 +30,8 @@ class BuyerEditProfileForm(UserChangeForm):
 class SellerEditProfileForm(UserChangeForm):
     class Meta:
         model = User
-        # fields = ['nama','username','email','password']
-        fields = ['username', 'email']
+        fields = ['name','username','email','password', 'namausaha', 'kategori', 'deskripsi', 'address', 'kontak', 'linktoko']
+        # fields = ['username', 'email',]
 
     # def clean_email(self):
     #     email = self.cleaned_data['email'].lower()

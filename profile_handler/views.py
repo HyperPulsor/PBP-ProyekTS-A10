@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http.response import HttpResponseRedirect, JsonResponse
 from django.http.response import HttpResponse
-from account.forms import SignUpBuyerForm
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.decorators import login_required
