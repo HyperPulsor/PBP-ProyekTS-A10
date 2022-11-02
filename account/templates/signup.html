@@ -1,0 +1,392 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Sign Up</title>
+{% endblock meta %}
+
+<!DOCTYPE html>
+<html lang="en">
+{% block content %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/account.css' %}">
+    <style>
+        .form-floating>.form-control,
+        .form-floating>.form-control-plaintext {
+            padding: 0rem 0.75rem;
+            height: calc(2.5rem + 3px);
+            line-height: 1;
+        }
+
+        .form-floating>label {
+            padding: 0.75rem 0.75rem;
+            font-size: 12.5px;
+            font-weight: 500;
+        }
+
+        .form-floating>input {
+            font-size: 13px;
+            font-weight: 450;
+        }
+
+        .form-floating>select {
+            font-size: 13px;
+            font-weight: 450;
+        }
+
+        .form-floating>select>option {
+            font-size: 13px;
+        }
+
+        .form-check>label {
+            color: rgb(95, 95, 95);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif !important;
+            ;
+        }
+
+        button {
+            font-weight: 500;
+        }
+    </style>
+
+</head>
+
+<body class="body1">
+
+    <div class="vh-100 d-flex justify-content-center align-items-center mt-3">
+        <div class="row row-cols-md-2 mx-auto" style="width: 95%">
+            <div class="col mb-2">
+                <div class="card text-center mt-3 mb-3 mx-3 shadow">
+                    <img src="https://img.freepik.com/free-vector/online-shopping-concept-young-man-shopping-online-via-smartphone_1150-51083.jpg?w=740&t=st=1667272650~exp=1667273250~hmac=c3a1879ecd4311cbc834c0087d13ff0e9c5302713be45affd5794407ec3ae07b"
+                        class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
+                        alt="Sample photo">
+                    <div class="card-body">
+                        <p style="text-align: center">
+                            <a class="btn btn-dark m-3 stretched-link" role="button"
+                                style="font-size: 14.5px; font-weight: 500; border-radius: 25px; padding: 0.5rem 2rem"
+                                data-bs-toggle="modal" data-bs-target="#regFormModal">Buat akun Pembeli</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-2">
+                <div class="card text-center mt-3 mb-3 mx-3 shadow">
+                    <img src="https://img.freepik.com/free-vector/marketplace-concept-illustration_114360-7002.jpg?w=740&t=st=1667272757~exp=1667273357~hmac=ff72e41d53ab022a2094cce506fe8401177b45ab3e114798c85a1d4a47285b6b"
+                        class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
+                        alt="Sample photo">
+                    <div class="card-body">
+                        <p style="text-align: center">
+                            <a class="btn btn-dark m-3 stretched-link" role="button"
+                                style="font-size: 14.5px; font-weight: 500; border-radius: 25px; padding: 0.5rem 2rem"
+                                data-bs-toggle="modal" data-bs-target="#bankFormModal">Buat akun Penjual</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <datalist id="cities"></datalist>
+
+    <div class="modal fade" id="bankFormModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content ">
+
+                <div class="modal-header md-6 mt-2">
+                    <div class="d-md-flex justify-content-start mx-2">
+                        <i i class="bi-building" style="font-size: 3.5rem; margin-right: 1rem;"></i>
+                        <div class="modal-title">
+                            <h4 class="text-dark fw-bold fs-4 mt-3 mb-0">Buat Akun</h4>
+                            <small class="text-muted fw-normal fs-7 mt-0 mb-1">untuk penjual</small>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        onclick="document.getElementById('seller-form').reset();"></button>
+                </div>
+
+
+                <div class="modal-body text-muted" style="font-size: 13px; font-weight: 500">
+                    <form name="seller-form" class="seller-form" method="POST" id="seller-form">
+                        {% csrf_token %}
+                        <div class="col-md-12 mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <span class="bi-journals"></span>
+                                </span>
+                                <div class="form-floating">
+                                    <input class="form-control" type="text" name="name" id="inputName"
+                                        autocomplete="off" placeholder="Nama Penjual" required>
+                                    <label for="name">Nama Penjual</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <span class="bi-envelope"></span>
+                                </span>
+                                <div class="form-floating">
+                                    <input type="email" name="email" id="inputEmail" class="form-control"
+                                        placeholder="Email" required autofocus>
+                                    <label for="email">Email</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <span class="bi-lock"></span>
+                                    </span>
+                                    <div class="form-floating">
+                                        <input type="password" name="password1" id="inputPassword1" class="form-control"
+                                            placeholder="Password" required>
+                                        <label for="password1">Password</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <span class="bi-lock"></span>
+                                    </span>
+                                    <div class="form-floating">
+                                        <input type="password" name="password2" id="inputPassword2" class="form-control"
+                                            placeholder="Konfirmasi Password" required>
+                                        <label for="password2">Konfirmasi Password</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <span class="bi-map"></span>
+                                </span>
+                                <div class="form-floating">
+                                    <textarea class="form-control" id="inputNamaUsaha" name="namausaha"
+                                        placeholder="Nama Usaha"
+                                        style="font-size:13px; height: 5.5rem; line-height:1.3"></textarea>
+                                    <label for="namausaha">Nama usaha</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <span class="bi-geo-alt"></span>
+                                </span>
+                                <div class="form-floating">
+                                    <select class="form-select form-control" name="kategori" id="select1"
+                                        aria-label="Default select example"
+                                        style="padding-top: 1rem; padding-bottom: 0rem;font-size:13px; height: 3rem; line-height: 1.5;">
+                                    </select>
+                                    <label for="select1">Kategori usaha</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <span class="bi-map"></span>
+                                </span>
+                                <div class="form-floating">
+                                    <textarea class="form-control" id="inputDeskripsi" name="deskripsi"
+                                        placeholder="Deskripsi Usaha"
+                                        style="font-size:13px; height: 5.5rem; line-height:1.3"></textarea>
+                                    <label for="deskripsi">Deskripsi Usaha</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <span class="bi-map"></span>
+                                </span>
+                                <div class="form-floating">
+                                    <textarea class="form-control" id="inputAddress" name="address"
+                                        placeholder="Alamat Usaha"
+                                        style="font-size:13px; height: 5.5rem; line-height:1.3"></textarea>
+                                    <label for="address">Alamat Usaha</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <span class="bi-map"></span>
+                                </span>
+                                <div class="form-floating">
+                                    <textarea class="form-control" id="inputKontak" name="kontak"
+                                        placeholder="Kontak Usaha"
+                                        style="font-size:13px; height: 5.5rem; line-height:1.3"></textarea>
+                                    <label for="kontak">Kontak Usaha</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <span class="bi-map"></span>
+                                </span>
+                                <div class="form-floating">
+                                    <textarea class="form-control" id="inputLinkToko" name="linktoko"
+                                        placeholder="Link Toko"
+                                        style="font-size:13px; height: 5.5rem; line-height:1.3"></textarea>
+                                    <label for="linktoko">Link Toko</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p id="error" style="color: red"></p>
+
+                    </form>
+                    <div class="col-md-12 text-center">
+                        <p class="align-self-center mt-4">
+                            Sudah punya akun? <a href="../login/">Login di sini</a>
+                        </p>
+
+                        <button class="btn btn-md btn-success mb-3" id="bank-button" type="submit"
+                            onclick="sellerSignUp();">Sign Up</button>
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="regFormModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true"
+        style="padding-right: 0px;">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <div class="modal-header md-6 mt-2">
+                    <div class="d-md-flex justify-content-start mx-2">
+                        <i i class="bi-people" style="font-size: 3.5rem; margin-right: 1rem;"></i>
+                        <div class="modal-title">
+                            <h4 class="text-dark fw-bold fs-4 mt-3 mb-0">Buat Akun</h4>
+                            <small class="text-muted fw-normal fs-7 mt-0 mb-1">untuk pembeli</small>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        onclick="document.getElementById('buyer-form').reset();"></button>
+                </div>
+
+                <div class="modal-body mt-0 text-muted" style="font-size: 13px; font-weight: 500">
+                    <form name="buyer-form" class="buyer-form" method="POST" id="buyer-form">
+                        {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <span class="bi-envelope"></span>
+                                    </span>
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" name="email" id="inputEmail2"
+                                            placeholder="Email" required>
+                                        <label for="email">Email</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                    <div class="form-floating">
+
+                                        <input type="text" name="username" id="inputUsername2" class="form-control"
+                                            placeholder="Username" required>
+                                        <label for="username">Username</label>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <span class="bi-person"></span>
+                                </span>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="inputName2" placeholder="Nama Lengkap"
+                                        name="name" autocomplete="off" required>
+                                    <label for="name">Nama Lengkap</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <span class="bi-lock"></span>
+                                    </span>
+                                    <div class="form-floating">
+                                        <input type="password" name="password1" id="inputPassword12"
+                                            class="form-control input" placeholder="Password" required>
+                                        <label for="password1">Password</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <span class="bi-lock"></span>
+                                    </span>
+                                    <div class="form-floating">
+                                        <input type="password" name="password2" id="inputPassword22"
+                                            class="form-control" placeholder="Konfirmasi Password" required>
+                                        <label for="password2">Konfirmasi Password</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    
+
+                    </form>
+                    <div class="col-md-12 text-center">
+                        <p class="align-self-center mt-4">
+                            Sudah punya akun? <a href="../login/">Login di sini</a>
+                        </p>
+
+                        <button class="btn btn-md btn-success mb-3" id="reg-button" type="submit"
+                            onclick="buyerSignUp();">Sign
+                            Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+    <script src="{% static 'js/account.js' %}"></script>
+    
+</body>
+{% endblock content %}
+
+</html>
