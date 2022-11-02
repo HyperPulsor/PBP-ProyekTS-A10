@@ -1,0 +1,140 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <title>{{forum.title}}</title>
+    <style>
+        body{
+            font-family: 'Poppins';
+        }
+        .card{
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            border-radius: 10px;
+            margin: 25px;
+        }
+        .card:hover{
+            box-shadow: 0 8px 16px 0  #6f9cde;
+        }
+        .container{
+            margin:20px;
+        }
+        #modalbtn {
+            margin-right: 15px;
+            float: right;
+        }
+        #deletebtn {
+            margin-right: 15px;
+            float: right;
+        }
+        #reply{
+            margin-left: 70px;
+        }
+        hr {
+            border: 0;
+            border-top: 3px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="modal" tabindex="-1" id="Modeladd">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Reply</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <form method="POST" id="form" onsubmit="return false;">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <input id="repforum" name="repforum" value={{forum.pk}} hidden>
+                    <div class="row">
+                        <label for="message" class="mb-2 font-5xl">Pesan</label>
+                        <textarea type="text" name="message" id="message" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                  <button id="buttonPost" type="submit" class="btn btn-primary" >Post</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="container">
+            <table>
+                <tr>
+                    <h5><b>{{forum.title}}</b></h5>
+                </tr>
+                <tr>
+                    <p>{{forum.user.username}} | {{forum.time}}</p>
+                </tr>
+                <tr>
+                    {{forum.discussion}}
+                </tr>
+            </table>
+            <button href="" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modeladd" id="modalbtn">Reply</button>
+            <!--admin only-->
+            {% if admin or user_forum %}
+            <a href='/forum/delete/{{forum.pk}}' id="deletebtn" class="btn btn-primary" >Delete</a>
+            {% endif %}
+            <!--admin only-->
+        </div>
+    </div>
+
+    <div id="table">
+        
+    </div>
+
+    <script>
+        async function getReply(category){
+            return fetch(`/forum/json_reply/{{forum.pk}}`).then((res) => res.json())
+        }
+        async function refreshReply(){
+            document.getElementById("table").innerHTML=""
+            const replies = await getReply()
+            let htmlString = ``
+            replies.forEach((item) => {
+                var date = new Date(item.fields.time)
+                var formatDate = date.toLocaleString()
+                htmlString += `\n
+                <div class="card" id="reply">
+                        <div class="container">
+                            <table id="table">
+                                <tr>
+                                    <td><b>${item.fields.username} | ${formatDate} </b></td>
+                                </tr>
+                                <tr>
+                                    <td>${item.fields.discussion}</td>
+                                </tr>
+                            </table>
+                        </div>
+                </div>
+                ` 
+            })
+            document.getElementById("table").innerHTML = htmlString
+        }
+        function addReply(){
+            fetch("{% url 'forum:add_reply' %}", {
+                method: "POST",
+                body: new FormData(document.querySelector('#form'))
+            }).then(refreshReply)
+            document.getElementById("form").reset()
+            return false
+        }
+        document.getElementById("buttonPost").onclick = addReply
+        refreshReply()
+    </script>
+
+</body>
+
+{% endblock content%}

@@ -42,10 +42,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'example_app',
+    'account',
+    'adminfaq',
+    'addkategori',
     'addproduct',
+<<<<<<< HEAD
     'account',
     'katalog'
+=======
+    'validasiproduct',
+    'forum',
+    'katalog',
+    'landing',
+>>>>>>> 3141d3d85fd05be510a87837a2e96bda38670caf
 ]
 
 MIDDLEWARE = [
@@ -130,11 +139,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+AUTH_USER_MODEL = 'account.User'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
+    '/var/www/static/',
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

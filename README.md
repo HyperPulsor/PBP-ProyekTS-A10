@@ -68,7 +68,7 @@ User dengan role Admin dapat mengisi form untuk menambahkan tampilan FAQ di land
 Daftar kategori yang dibuat admin, toko dan daftar produk yang dibuat oleh seller, serta fitur search yang dapat digunakan oleh buyer untuk mencari toko dan produk yang mereka inginkan.
 
 ### 6. Menampilkan card produk dan detail produk dan implementasi fitur bookmark toko atau produk untuk buyer
-Detail tiap produk yang telah dibuat oleh seller akan ditampilkan ketika buyer meng-klik button di card produk untuk menuju ke halaman detail produk. Pada card akan ditampilkan foto pertama yang diupload oleh buyer sebagai thumbnail representasi dari tiap produk. Kemudian, buyer dapat melakukan bookmark terhadap produk atau toko yang menarik kemudian hasilnya akan ditampilkan di halaman profile.
+Detail tiap produk yang telah dibuat oleh seller akan ditampilkan ketika buyer meng-klik button di card produk untuk menuju ke halaman detail produk. Pada card akan ditampilkan foto pertama yang diupload oleh buyer sebagai thumbnail representasi dari tiap produk.
 
 ### 7. Fitur forum diskusi antara seller dan buyer
 Pada fitur forum masing-masing user dapat memilih topik (filter) yang ingin mereka baca dan diskusikan. Buyer dan Seller dapat saling berinteraksi memposting pendapat mereka, bertanya, menjawab, dan lainnya dengan mengisi form. Selain itu user juga dapat melakukan sorting berdasarkan forum terbaru (waktu posting). Khusus untuk user dengan role admin, admin dapat menghapus forum yang tidak pantas. 

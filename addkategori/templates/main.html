@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% block meta %} {% endblock meta %} {% block content %}
+
+<div style="padding-right: 50px; padding-left: 50px; padding-top: 125px; padding-bottom: 125px">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <h3><strong> Menambahkan Kategori </strong></h3>
+    </div>
+  </nav>
+
+  <div class="d-flex justify-content-center">
+    <button style="background-color: white"><a href="{% url 'kategori:create_kategori' %}">Create kategori</a></button>
+  </div>
+  <div class="d-flex justify-content-center">
+    {% comment %} Add the data below this line {% endcomment %} {% for kategori in list_kategori %}
+    <div class="row">
+      <div class="column">
+        <div class="card" style="width: 18rem; text-align: center; padding-right: 10px; padding-left: 10px">
+          <div class="card-body">
+            <h5 class="card-title">{{kategori.nama}}</h5>
+            <img src="{{kategori.file_url}}" alt="" width="200" height="200" />
+            <p class="card-text">{{kategori.deskripsi}}</p>
+          </div>
+
+          <div class="card-body">
+            <button class="btn btn-secondary;"><a href="{% url 'kategori:delete_kategori' kategori.id %}">Delete Kategori</a></button>
+            <a href="#" class="btn btn-primary">Lihat Toko</a>
+          </div>
+        </div>
+        <br />
+        <br />
+        {% endfor %}
+      </div>
+      <br />
+    </div>
+    {% endblock content %}
+  </div>
+</div>

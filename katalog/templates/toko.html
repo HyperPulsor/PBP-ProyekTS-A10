@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% load static %}
 <html>
     <head>
@@ -14,12 +15,40 @@
             function myFunction() {
               alert("Item telah dimasukan ke bookmark!");
             }
+=======
+{% extends 'base.html' %} {% load static %} {% block content %}
+<html>
+    <head>
+        <script>$(document).ready(() => {
+            $.get('/katalog/show_json_produk/'+id, (tokos) => {
+              tokos.forEach((toko) => {
+                $('#row').append(`
+                <div class="col-4 mt-4 mb-4">
+                    <div class="card text-center h-100">
+                        <img class="img-responsive pt-3" src="{% static '/images/2.jpg' %}" alt="Gambar toko">
+                      <div class="card-body">
+                        <div class="card-title" style="text-align: left">
+                            <h5 class="namaToko pt-4"><b>Toko {{toko.nama_toko}}</b></h4>
+                            <h7 class="deskripsi">{{toko.email}}</h5>
+                        </div>
+                        <div class="float-end pb-3">
+                            <button class="align-self-end btn btn-primary btn-lg" style="margin-top: auto;">Lihat Toko</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                `)
+              })
+            })
+        })
+>>>>>>> 3141d3d85fd05be510a87837a2e96bda38670caf
         </script>
     </head>
 
     <body>
         <nav class="navbar navbar-dark bg-primary">
             <a class="navbar-brand" href="#"></a>
+<<<<<<< HEAD
             <button class="align-self-end btn btn-primary btn-lg" style="margin-top: auto;"><a href="{% url 'katalog:show_favorites' %}" class="link-light"><b>Lihat Bookmark</b></a></button>
         </nav>
         <div class="px-5 py-3">
@@ -69,3 +98,45 @@
         </div>
     </body>
 </html>
+=======
+        </nav>
+        <div class="px-5 py-3">
+            <div class="text-left">
+                <h1> Kategori {{kategori}} </h1>
+                {% comment %} foto kategori disini {% endcomment %}
+                <img class="img-fluid" src="{% static 'images/4.jpg' %}" alt="Gambar kategori">
+                <h5>{{deskripsi}}</h5>
+            </div>
+    
+            <div class="text-left pt-5">
+                <h1> Toko Terkait Kategori Tersebut</h1>
+            </div>
+            
+            <div class="container-lg mt-4 justify-content-center align-item-center">
+                <div class="row">
+                {% for toko in tokos %}
+                  <div class="col-4 mt-4 mb-4">
+                    <div class="card text-center h-100">
+                        <img class="img-responsive pt-3" src="{% static '/images/2.jpg' %}" alt="Gambar toko">
+                      <div class="card-body">
+                        <div class="card-title" style="text-align: left">
+                            <h5 class="namaToko pt-4"><b>Toko {{toko.nama_toko}}</b></h4>
+                            <h7 class="deskripsi">{{toko.email}}</h5>
+                        </div>
+                        <div class="float-end pb-3">
+                            <button class="align-self-end btn btn-primary btn-lg" style="margin-top: auto;">
+                                <a href="{% url 'katalog:show_produk_detail' toko.id %}" class="link-light">Lihat Toko</a></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+{% endblock %}
+>>>>>>> 3141d3d85fd05be510a87837a2e96bda38670caf

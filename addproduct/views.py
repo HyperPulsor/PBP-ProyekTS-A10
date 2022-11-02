@@ -11,55 +11,11 @@ from .forms import *
 from django.http.response import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
-# from .models import Project
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 import json
 
-# def create_product(request):
-#     if request.method == 'POST':
-#         form = AddProductForm(request.POST)
-#         if form.is_valid():
-#             # print(form.cleaned_data)
-#             nama_produk = form.cleaned_data.get('nama_produk')
-#             kategori_produk = form.cleaned_data.get('nama_produk')
-#             harga_produk = form.cleaned_data.get('harga_produk')
-#             gambar_produk = form.cleaned_data.get('gambar_produk')
-#             deskripsi_produk = form.cleaned_data.get('deskripsi_produk')
-#             link_produk = form.cleaned_data.get('link_produk')
-#             is_valid = models.Product.get('is_valid')
-#             product = Product.objects.create(
-
-#                 nama_produk=nama_produk, 
-#                 kategori_produk = kategori_produk,
-#                 harga_produk = harga_produk,
-#                 gambar_produk = gambar_produk,
-#                 deskripsi_produk = deskripsi_produk,
-#                 link_produk = link_produk,
-#                 is_valid = is_valid,
-#                 user=request.user,
-#                 )
-            
-#             result = {
-#             'fields':{
-#                 'nama_produk' : product.nama_produk, 
-#                 'kategori_produk' : product.kategori_produk,
-#                 'harga_produk' : product.harga_produk,
-#                 'gambar_produk' : product.gambar_produk,
-#                 'deskripsi_produk' : product.deskripsi_produk,
-#                 'link_produk' : product.link_produk,
-#                 'is_valid' : product.is_valid,
-#             },
-#             }
-#             print(result)
-#             return JsonResponse(result)
-
-    # if a GET (or any other method) we'll create a blank form
-    # else:
-    #     form = AddProductForm()
-
-    # return render(request, 'catalog.html', {'form': form})
 
 
 def show_json(request):

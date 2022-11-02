@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% load static %}
 <html>
     <head>
@@ -10,11 +11,38 @@
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+=======
+{% extends 'base.html' %} {% load static %} {% block content %}
+<html>
+    <head>
+>>>>>>> 3141d3d85fd05be510a87837a2e96bda38670caf
         <script>
             function myFunction() {
               alert("Item telah dimasukan ke bookmark!");
             }
         </script>
+<<<<<<< HEAD
+=======
+        <script>
+            $('#form').submit((e) => {
+          e.preventDefault()
+          $.ajax({
+            url: '/katalog/like/1',
+            type: 'POST',
+            dataType: 'json',
+            data: $('#form').serialize(),
+            success: (respond) => {
+              $('#row').append(`
+                <h5 class="deskripsi">{{produk.like}}</h5>
+              `)
+            },
+            error: () => {
+              alert("ERROR")
+            }
+          })
+        })
+        </script>
+>>>>>>> 3141d3d85fd05be510a87837a2e96bda38670caf
     </head>
 
     <body>
@@ -26,6 +54,7 @@
                 <h1> produk dari toko {{nama_toko}}</h1>
             </div>
             
+<<<<<<< HEAD
             <div class="row">
                 {% for produk in list_produk %}
                 <div class="col mt-2 ml-2 mb-2 mr-2">
@@ -46,3 +75,34 @@
         </div>
     </body>
 </html>
+=======
+            <div class="container-lg mt-4 justify-content-center align-item-center">
+                <div class="row">
+                {% for produk in list_produk %}
+                  <div class="col-4 mt-4 mb-4">
+                    <div class="card text-center h-100">
+                        <img class="img-fluid pt-3 img-responsive" src="{% static '/images/3.jpg' %}" alt="Gambar toko">
+                      <div class="card-body">
+                        <div class="card-title" style="text-align: left">
+                            <h3 class="nama_produk"><b>{{produk.nama_produk}}</b></h5>
+                            <h4 class="harga">{{produk.harga_produk}}</h5>
+                            <h4 class="kategori">{{produk.kategori_produk}}</h5>  
+                            <h6 class="deskripsi">{{produk.deskripsi_produk}}</h5> 
+                            <h6 class="link">{{produk.link_produk}}</h5>
+                        </div>
+                        <form id="form">
+                            {% csrf_token %}
+                            <button id="button-submit" type="submit" class="btn btn-success btn-lg btn-block"><b>Like</b></button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                  
+                </div>
+              </div>
+        </div>
+    </body>
+</html>
+{% endblock content %}
+>>>>>>> 3141d3d85fd05be510a87837a2e96bda38670caf

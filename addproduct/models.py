@@ -1,7 +1,9 @@
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
 
 # https://medium.com/ibisdev/upload-multiple-images-to-a-model-with-django-fd00d8551a1c
+from account.models import User
 
 class MultiImage(models.Model):
     def default(self):
@@ -47,17 +49,7 @@ class Product(models.Model):
         
     ]
 
-    nama_produk = models.CharField(max_length=255)
-    kategori_produk = models.CharField(
-        max_length=255,
-        choices=Options_Kategori,
-        default=Makanan,
-    )
-    harga_produk = models.IntegerField()
-    gambar_produk = models.ImageField(null = True, blank= True,upload_to = "addproduct/files/images/")
-    deskripsi_produk = models.TextField()
-    link_produk = models.TextField()
-    is_valid = models.BooleanField()
+
 
 
 
