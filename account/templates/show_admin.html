@@ -1,10 +1,13 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
+<head>
+  <script src="{% static 'js/donasi.js' %}"></script>
+</head>
 <body>
   <div class="navbar navbar-light navbar-expand-lg bg-primary">
     <div class="container-fluid" id="container-navbar">
       <div class="navbar-brand mx-5">
         <img
-          src="{% static 'images/logo.png' %}"
+          src="{% static 'images/logo2.png' %}"
           width="30"
           height="30"
           class="d-inline-block align-top"
@@ -14,25 +17,29 @@
       </div>
       <div class="container-flex justify-content-space-between mx-5">
         <a
-          href="{% url 'account:adminpage' %}"
+          href="{% url 'account:buyer' %}"
           class="mx-2"
           style="color: white; text-decoration: none; text-align: right"
           >Home</a
         >
         <a
-          href="#"
+          href="/forum/semua/"
           class="mx-2"
           style="color: white; text-decoration: none; text-align: right"
-          >Catalog</a
+          >Forums</a
         >
-        <a role="button" href="{% url 'account:logout' %}" class="btn btn-light mx-2" style="text-align: right"
+        <a
+          role="button"
+          href="{% url 'account:logout' %}"
+          class="btn btn-light mx-2"
+          style="text-align: right"
           >Logout</a
         >
       </div>
     </div>
   </div>
   <div class="container d-flex mt-5 justify-content-center align-item-center">
-    <img src="{% static 'images/main-pic.jpg'%}" alt="top-pic"/>
+    <img src="{% static 'images/main-pic.jpg'%}" alt="top-pic" />
   </div>
   <div class="container-lg mt-5 mb-2 mr-3">
     <h4 style="text-align: center">SELAMAT DATANG DI</h4>
@@ -126,17 +133,19 @@
   </div>
   <div class="container-lg mt-4 justify-content-center align-item-center">
     <div class="row">
-      {% for cards in allCards %}
+      {% for kategori in kategori_item %}
       <div class="col-4 mt-4 mb-4">
         <div class="card text-center h-100">
-          <img src="{{cards.file_url}}" class="card-img-top" />
+          <img src="{{kategori.gambar}}" class="card-img-top" />
           <div class="card-body">
             <div class="card-title" style="text-align: left">
-              <h4 class="card-title">{{cards.name}}</h4>
+              <h4 class="card-title">{{kategori.nama}}</h4>
+              <h4 class="card-title">{{kategori.deskripsi}}</h4>
+              <h4 class="card-title">{{kategori.file_url}}</h4>
             </div>
           </div>
           <div class="card-footer">
-            <button class="btn btn-primary">Button</button>
+            <submit class="btn btn-primary" ><a href="{% url 'katalog:show_toko_kategori' kategori.nama kategori.deskripsi %}" class="link-light">Button</a></submit>
           </div>
         </div>
       </div>
@@ -247,12 +256,80 @@
       </div>
     </div>
   </div>
+  <div
+    class="container-lg justify-content-center align-item-center text-align-center mt-5 mb-2"
+  >
+    <h4 style="text-align: center">DONATION</h4>
+    <p style="text-align: center">
+      Website kami tidak memasang iklan untuk keperluan monetisasi. Oleh karen
+      itu, donasi sangat diapresiasi supaya website tetap berjalan
+    </p>
+  </div>
   <div class="container d-flex justify-content-center align-item-center mb-5">
     <div class="mx-2">
-      <button class="btn btn-primary" type="button">Donasi Uang</button>
+      <button
+        class="btn btn-primary"
+        type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+        id="button_uang"
+        onclick="changeLabelUang();"
+      >
+        Donasi Uang
+      </button>
     </div>
     <div class="mx-2">
-      <button class="btn btn-primary" type="button">Donasi Barang</button>
+      <button
+        class="btn btn-primary"
+        type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+        id="button_barang"
+        onclick="changeLabelBarang();"
+      >
+        Donasi Barang
+      </button>
+    </div>
+  </div>
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Donasi Uang</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="POST">
+            {% csrf_token %} 
+            <h5 id="label_input">Input Uang</h1>
+            <input type="text" id="input_donasi" />
+            <input type="hidden" id="input_type" />
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-primary" id="button-donasi" onclick="submit();">
+            Save changes
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </body>
