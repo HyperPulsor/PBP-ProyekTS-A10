@@ -18,12 +18,11 @@ class Image(models.Model):
 class Product(MultiImage):
     id_toko = models.IntegerField(default=0)
     like = models.IntegerField(default=0)
-    name = models.CharField(max_length=255)
     nama_produk = models.CharField(max_length=255)
     kategori_produk = models.CharField(max_length=255)
     harga_produk = models.IntegerField()
-    gambar_produk = models.ImageField()
-    deskripsi_produk = models.CharField(max_length=255)
+    gambar_produk = models.TextField(max_length=255)
+    deskripsi_produk = models.TextField(max_length=255)
     link_produk = models.TextField()
     is_valid = models.BooleanField()
 

@@ -1,0 +1,67 @@
+<head>
+  <style>
+    .landing-page a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .landing-page p {
+      color: black;
+    }
+
+    .landing-page #left-nav a {
+      color: white;
+      text-decoration: none;
+      text-align: right;
+    }
+
+    .landing-page #left-nav a#login {
+      color: black;
+      text-align: right;
+    }
+
+    .card:hover{
+      box-shadow: 0 8px 16px 0 #6f9cde;
+    }
+  </style>
+</head>
+<body class="landing-page">
+  <div class="navbar navbar-light navbar-expand-lg bg-primary">
+    <div class="container-fluid" id="navbar">
+      <div class="navbar-brand mx-5" id="logo">
+        <img
+          src="https://raw.githubusercontent.com/HyperPulsor/PBP-ProyekTS-A10/landing_page_3/static/images/logo2.png"
+          width="30"
+          height="30"
+          class="d-inline-block align-top"
+          alt=""
+        />
+        <a href="#" id="logo-text">MedsosUMKM</a>
+      </div>
+      <div class="container-flex justify-content-space-between mx-5" id="left-nav">
+        <a
+          href="{% url 'account:buyer' %}"
+          class="mx-2"
+          >Home</a
+        >
+        <a
+          href="#"
+          class="mx-2"
+          >Profile</a
+        >
+        <a
+          href="/forum/semua/"
+          class="mx-2"
+          >Forums</a
+        >
+        <a
+          role="button"
+          href="{% url 'account:logout' %}"
+          class="btn btn-light mx-2"
+          id="login"
+          >Logout</a
+        >
+      </div>
+    </div>
+  </div>
+  <body class="landing-page">

@@ -1,0 +1,66 @@
+{% if product %}
+{% for item in product %}
+
+<main class="mt-5 pt-4">
+    <div class="container dark-grey-text mt-5">
+  
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+  
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+          <img src="{{item.gambar_product}}" class="img-fluid" alt="">
+  
+        </div>
+        <!--Grid column-->
+        
+       
+  
+      
+  
+        {% endfor %}
+      {% endif %}
+    </div>
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+  
+          <!--Content-->
+          <div class="p-4">
+  
+            <div class="mb-3">
+                <span class="badge badge-pill badge-warning">{{item.kategori_produk}}</span>
+            </div>
+            
+            <h3>{{item.nama_produk}}</h3>
+            <p class="lead">
+              <span>Rp{{item.harga_produk}},-</span>
+            </p>
+  
+            <p>{{item.deskripsi_produk}}</p>
+  
+            <form class="d-flex justify-content-left">
+            
+            <button type="button" class="btn btn-info">
+                <a href="{{item.link_produk}}" style="color:white; text-decoration: None;" target=”_blank”>
+                  Beli Produk
+                </a> 
+            </button>
+
+  
+            </form>
+  
+          </div>
+          <!--Content-->
+  
+        </div>
+        <!--Grid column-->
+  
+      </div>
+      <!--Grid row-->
+  
+      <hr>
+  
+  
+    </div>
+  </main>
+  Main layout

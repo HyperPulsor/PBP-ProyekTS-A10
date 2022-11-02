@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" type="image/x-icon" href="   https://cdn.discordapp.com/attachments/1033777915013386362/1037265491477147668/shops.png" />
+ 
+    <title>eCommerce Product Detail</title>
+    <link href="https://fonts.google.com/specimen/Poppins" rel="stylesheet">
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  </head>
+
+  <body>
+      <div class="text-left">
+        <h5>
+          <a href="/addproduct/katalog/add" >
+            < Kembali
+           </a>
+        </h5>
+  
+      </div>
+
+ 
+    <!--Main layout-->
+    <section class="py-5">
+      <div class="container px-4 px-lg-5 my-5 my-5">
+          <div class="row gx-4 gx-lg-5 align-items-center">
+              <div class="col-md-6">
+                <img src={{product.gambar_produk}} alt="gambar" class="card-img-top mb-5 mb-md-0"/>
+              </div>
+              
+              <div class="col-md-6">
+                  <h2 class="display-5 fw-bolder">{{product.nama_produk}}</h2>
+                  <h3 style="background-color:aqua">{{product.gambar_product}}</h3>
+
+                    <span class="badge badge-pill badge-warning">{{product.kategori_produk}}</span>
+                  <h5 class="display-5 fw-bolder">Rp{{product.harga_produk}},-</h5>
+                      <p class="lead">
+                        {{product.deskripsi_produk}}
+                      </p>
+                      <div class="d-flex"></div>
+                                  
+                      <button type="button" class="btn btn-info">
+                        <a href="{{product.link_produk}}" style="color:white; text-decoration: None;" target=”_blank”>
+                          Beli Produk
+                        </a> 
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  </body>
+</html>
