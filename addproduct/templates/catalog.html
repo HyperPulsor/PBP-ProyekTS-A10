@@ -1,0 +1,176 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.google.com/specimen/Poppins" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <title>Add Product</title>
+
+  </head>
+  <body>
+
+
+  <!-- Modal Add Product -->
+  <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <form class="form-example" action="" method="POST" id="formaddproduct" enctype="multipart/form-data">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Add Product</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div <img class="md-form mb-6 d-flex justify-content-center">
+        <img class="md-form mb-6 d-flex justify-content-center" src='https://cdn.discordapp.com/attachments/1033777915013386362/1036485585352798228/delivery-box.png'   width="20%"  height="20%" ALIGN="center">
+      </div>
+      
+      {% csrf_token %}
+      <!-- Modal Body -->
+      <div class="modal-body mx-3">
+        <div class="md-form">
+          <label data-error="wrong" data-success="right">Nama Produk</label>
+          {{ form.nama_produk }}
+        </div>
+
+        <div class="md-form mb-6">
+          <label data-error="wrong" data-success="right">Kategori Produk</label>
+          {{ form.kategori_produk }}
+        </div>
+
+        <div class="md-form mb-7">
+          <label data-error="wrong" data-success="right" >Harga Produk</label>
+          {{ form.harga_produk}}
+        </div>
+
+        <div class="md-form mb-8">
+          <label data-error="wrong" data-success="right" >Gambar Produk</label>
+          {{ form.gambar_produk }}
+        </div>
+
+        <div class="md-form mb-9">
+          <label data-error="wrong" data-success="right" >Deskripsi Produk</label>
+          {{ form.deskripsi_produk }}
+        </div>
+
+        <div class="md-form mb-7">
+          <label data-error="wrong" data-success="right" >Link Produk</label>
+          {{ form.link_produk }}
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary" id="submit" data-bs-dismiss="modal">
+          Tambahkan Produk
+        </button>
+      </div>
+    </form>
+
+    </div>
+  </div>
+</div>
+
+<div class="text-left pt-5">
+  <h1> produk dari toko {{nama_toko}}</h1>
+</div>
+
+<div class="text-center">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalLoginForm">
+    ➕ Tambah Produk
+  </button>
+
+</div>
+
+<div>
+    <div  class="card-grid" style=" display: grid; grid-template-columns: auto auto auto auto;">
+    {% if product %}
+      {% for item in product %}
+
+      {% include 'product_cards.html' %}
+
+
+      {% endfor %}
+    {% endif %}
+  </div>
+  <div>
+  <div>
+
+<!-- Block container grid card  -->
+<!-- <div class="card-grid" style=" display: grid; grid-template-columns: auto auto auto auto;"></div> -->
+
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+    <script type="text/javascript" language="javascript">
+      function getCookie(c_name)
+        {
+            if (document.cookie.length > 0)
+            {
+                c_start = document.cookie.indexOf(c_name + "=");
+                if (c_start != -1)
+                {
+                    c_start = c_start + c_name.length + 1;
+                    c_end = document.cookie.indexOf(";", c_start);
+                    if (c_end == -1) c_end = document.cookie.length;
+                    return unescape(document.cookie.substring(c_start,c_end));
+                }
+            }
+            return "";
+        }
+        $("#formaddproduct").submit(function(e)
+        {
+          e.preventDefault()
+          $.ajax({
+            type:'POST',
+            url:"/addproduct/json/ajax/",
+            data:{
+              nama_produk:$('#nama_produk').val(),
+              kategori_produk:$('#kategori_produk').val(),
+              harga_produk:$('#harga_produk').val(),
+              gambar_produk:$('#gambar_produk').val(),
+              deskripsi_produk:$('#deskripsi_produk').val(),
+              link_produk:$('#deskripsi_produk').val(),
+            },
+            headers: { "X-CSRFToken": getCookie("csrftoken") },
+            success:function(data){
+              console.log(data)
+            }
+          })
+        })
+      //   $("#formaddproduct").submit(function(e)
+      //   {
+      //     e.preventDefault()
+      //     var formData = new FormData(this);
+      //     $.ajax({
+      //           url:'/url/',
+      //           type: 'POST',
+      //           data: formData,
+      //           success: function (response) {
+      //           },
+      //           error: function (response) {
+      //           },
+      //           cache: false,
+      //           contentType: false,
+      //           processData: false
+      //   });
+      // }
+    </script>
+  </body>
+</html>

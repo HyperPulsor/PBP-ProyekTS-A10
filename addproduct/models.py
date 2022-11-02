@@ -1,19 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Project(models.Model):
-    nama_pemilik = models.CharField(max_length=50)
-    id_pemilik = models.ForeignKey(to=User, on_delete=models.CASCADE)
-    nama_project = models.CharField(max_length=50)
-    kategori = models.CharField(max_length=50)
-    bayaran = models.IntegerField()
-    deskripsi = models.TextField()
-    estimasi = models.CharField(max_length=30)
-    skills = models.TextField()
-    kontak_pemilik = models.TextField()
-    jumlah_orang = models.IntegerField()
-    acc = models.BooleanField(default=False)
-    buka = models.BooleanField(default=True)
+# https://medium.com/ibisdev/upload-multiple-images-to-a-model-with-django-fd00d8551a1c
 
 class MultiImage(models.Model):
     def default(self):
@@ -28,15 +16,51 @@ class Image(models.Model):
     width = models.FloatField(default=100)
     length = models.FloatField(default=100)
 
-class Product(MultiImage):
-    name = models.CharField(max_length=255)
+class Product(models.Model):
+    Makanan = 'Makanan'
+    Pakaian = 'Pakaian'
+    Perlengkapan_Rumah_Tangga = 'Perlengkapan Rumah Tangga'
+    Otomotif = 'Otomotif'
+    Alat_Tulis_Kantor = 'Alat Tulis Kantor'
+    Kesehatan = 'Kesehatan'
+    Kecantikan = 'Kecantikan'
+    Alat_Musik = 'Alat Musik'
+    Gadget = 'Gadget'
+    Aksesoris = 'Aksesoris'
+    Footwear = 'Footwear'
+    Tas = 'Tas'
+
+
+    Options_Kategori = [
+        (Makanan, 'Makanan'),
+        (Pakaian, 'Pakaian'),
+        (Perlengkapan_Rumah_Tangga, 'Perlengkapan Rumah Tangga'),
+        (Otomotif, 'Otomotif'),
+        (Alat_Tulis_Kantor, 'Alat Tulis Kantor'),
+        (Kesehatan,'Kesehatan'),
+        (Kecantikan, 'Kecantikan'),
+        (Alat_Musik, 'Alat Musik'),
+        (Gadget, 'Gadget'),
+        (Aksesoris, 'Aksesoris'),
+        (Footwear, 'Footwear'),
+        (Tas, 'Tas'),
+        
+    ]
+
     nama_produk = models.CharField(max_length=255)
-    kategori_produk = models.CharField(max_length=255)
+    kategori_produk = models.CharField(
+        max_length=255,
+        choices=Options_Kategori,
+        default=Makanan,
+    )
     harga_produk = models.IntegerField()
-    gambar_produk = models.ImageField()
-    deskripsi_produk = models.CharField(max_length=255)
+    gambar_produk = models.ImageField(null = True, blank= True,upload_to = "addproduct/files/images/")
+    deskripsi_produk = models.TextField()
     link_produk = models.TextField()
     is_valid = models.BooleanField()
+
+
+
 
 
 
