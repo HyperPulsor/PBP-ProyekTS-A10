@@ -1,12 +1,16 @@
 from django.urls import path
-from account.views import *
+from . import views
 
 app_name = 'account'
+
 urlpatterns = [
-    path('', main, name='main'),
-    path('signup/', signup, name='signup'),
-    path('signup/buyer/', buyer_signup, name='buyer_signup'),
-    path('signup/seller/', seller_signup, name='seller_signup'),
-     path('login/', login_user, name='login'),
-    path('logout/', logout_user, name='logout'),
+    path('', views.index, name= 'index'),
+    path('login/', views.login_view, name='login_view'),
+    path('registerbuyer/', views.registerbuyer, name='registerbuyer'),
+    path('registerseller/', views.registerseller, name='registerseller'),
+    path('adminpage/', views.admin, name='adminpage'),
+    path('buyer/', views.buyer, name='buyer'),
+    path('seller/', views.seller, name='seller'),
+    path('logout/', views.logout_user, name='logout'),
+    path('donasi_barang/', views.donasi_barang, name='donasi_barang')
 ]
