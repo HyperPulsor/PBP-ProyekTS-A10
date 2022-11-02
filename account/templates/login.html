@@ -1,79 +1,103 @@
-<!doctype html>
+{% extends 'base.html' %}
 {% load static %}
+
+{% block meta %}
+<title>Login</title>
+{% endblock meta %}
+
+{% block content %}
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.google.com/specimen/Poppins" rel="stylesheet">
 
-    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+<head>
+    <link rel="stylesheet" href="{% static 'css/account.css' %}">
+    <style>
+        .form-floating>.form-control,
+        .form-floating>.form-control-plaintext {
+            padding: 0rem 0.75rem;
+            height: calc(2.5rem + 3px);
+            line-height: 1;
+        }
 
-    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+        .form-floating>label {
+            color: rgb(95, 95, 95);
+            padding: 0.75rem 0.75rem;
+            font-size: 13px;
+            font-weight: 500;
+        }
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        .form-floating>input {
+            font-size: 14px;
+            font-weight: 450;
+        }
 
-    <!-- Style -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </style>
+    <script>
+        $(window).load(function() {
+            $('login-form').get(0).reset(); //clear form data on page load
+        });
+    </script>
+</head>
 
-    <title>Multiple user login</title>
-  </head>
-  <body>
-  <div class="content">
-    <div class="container">
-      <div class="row justify-content-center">
-        <!-- <div class="col-md-6 order-md-2">
-          <img src="images/undraw_file_sync_ot38.svg" alt="Image" class="img-fluid">
-        </div> -->
-        <div class="col-md-6 contents">
-          <div class="row justify-content-center">
-            <div class="col-md-12">
-              <div class="form-block">
-                  <div class="mb-4">
-                </div>
-
-              <span class="mb-0 text-muted">
-                {% if msg %}
-                    {{ msg | safe }}
-                {% else %}
-                    Login page
-                {% endif %}
-              </span>
-                <form  method="post">
+<body class="body1"> 
+    <div class = "login vh-100 d-flex justify-content-center align-items-center">
+        <div class="card text-center mx-2 m-10 shadow" style="width: 20rem">
+            <div class="card-body" style="font-weight: 500">
+                <h4 class="card-title mt-3 mb-4 fw-bold">Login</h4>
+                <form method="POST" action="" id="login-form">
                     {% csrf_token %}
-                  <div class="form-group first">
-                    <label for="username">Username</label>
-                      {{ form.username }}
-                  </div>
-                  <div class="form-group last mb-4">
-                    <label for="username">Password</label>
-                    {{ form.password }}
-                  </div>
+                    <table>
+                        <tr>
+                            <div class="input-group mb-2">
+                                <span class="input-group-text bg-white">
+                                    <span class="bi-file-earmark-person" ></span>
+                                </span>
+                                <div class="form-floating">
+                                    <input class="form-control" type="text" name="email" placeholder="Username or Email" >
+                                    <label for="email">Username or Email</label>
+                                </div>
+                            </div>
+                        </tr>   
+                        
+                        <tr>
+                            <div class="input-group mb-2">
+                                <span class="input-group-text bg-white">
+                                    <span class="bi-lock" ></span>
+                                </span>
+                                <div class="form-floating">
+                                    <input style="font-size: 13px" type="password" name="password" placeholder="Password" class="form-control">
+                                    <label for="password">Password</label>
+                                </div>
+                            </div>
+                        </tr>  
 
-                  <div class="d-flex mb-5 align-items-center">
-                    <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
-                      <input type="checkbox" checked="checked"/>
-                      <div class="control__indicator"></div>
-                    </label>
-                  </div>
-
-                  <input type="submit" value="Log In" class="btn btn-pill text-white btn-block btn-primary">
+                        <input class="btn login_btn mt-3 mb-15" 
+                        style="background: #0275d8; color:white; font-size: 14px; border-radius: 20px; width:40%" 
+                        onmouseover="this.style.backgroundColor='#555'" 
+                        onmouseout="this.style.backgroundColor='#0275d8'" type="submit" value="Login">
+                    
+                    </table>
                 </form>
-              </div>
             </div>
-          </div>
-
+            <div>
+                {% if messages %}
+                    {% for message in messages %}
+                    <p style="font-size: 13px; text-align: center; color:red; margin-left: 2rem; margin-right: 2rem">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <br>
+            <div class="card-footer text-muted">
+                <p class="mt-2 mb-0" style="font-size: 14px">Belum mempunyai akun?</p> 
+                <a class="btn btn-outline-dark mt-2 mb-3" style="font-size: 13px; border-radius: 20px; width:7rem" role="button" href="{% url 'account:signup' %}"> Buat Akun</a>
+            </div>
+            </div>
         </div>
-
-      </div>
     </div>
-  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+</body>
 
-
-    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-    <script src="{% static 'js/popper.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>
-  </body>
 </html>
+
+
+{% endblock content %}
