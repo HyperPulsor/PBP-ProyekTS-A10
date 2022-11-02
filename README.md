@@ -44,7 +44,7 @@ Pada fitur ini akan terdapat tiga role untuk user yakni buyer, seller, dan admin
 
 
 ### 2. Halaman Profil User
-User dengan Role Seller dan Buyer dapat mengubah profilnya masing-masing di halaman ini. Bagian yang dapat diubah adalah input yang telah diberikan ketika user mengisi form register berdasarkan role-nya masing-masing. Pada halaman ini, untuk role buyer ada section untuk melihat barang menarik yang telah di bookmark
+User dengan Role Seller dan Buyer dapat mengubah profilnya masing-masing di halaman ini. Bagian yang dapat diubah adalah username, email, dan passsword berdasarkan input yang telah diberikan ketika user mengisi form register berdasarkan role-nya masing-masing.
 
 ### 3. Fitur add product katalog dan edit catalog untuk Seller
 User dengan role Seller dapat menambahkan produk ke katalog tokonya masing-masing dengan mengisi form terkait produk yang ingin ditambahkan. Kemudian seller juga dapat mengubah katalog dengan menghapus produk yang diinginkan.
