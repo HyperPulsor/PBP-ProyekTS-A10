@@ -206,3 +206,15 @@ h2 {
 .control--checkbox input:disabled:checked ~ .control__indicator {
   background-color: #7e0cf5;
   opacity: .2; }
+
+@media(max-width: 700px){
+  #navbar {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.landing-page{
+  font-family: 'Poppins';
+}
