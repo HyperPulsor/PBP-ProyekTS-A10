@@ -25,7 +25,6 @@ def signup(request):
         return HttpResponseRedirect(reverse('account:main'))
     return render(request, "signup.html")
 
-@csrf_exempt
 def buyer_signup(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse('account:main'))

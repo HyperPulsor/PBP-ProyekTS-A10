@@ -6,6 +6,22 @@
   box-sizing: border-box;
   font-family: 'Poppins',sans-serif!important;;
 }
+
+@keyframes spin {
+0% {
+    --rotate: 0deg;
+}
+100% {
+    --rotate: 360deg;
+}
+}
+
+@property --rotate {
+syntax: "<angle>";
+initial-value: 132deg;
+inherits: false;
+}
+
 body {
     font-family: 'Poppins',sans-serif!important;;
 }
@@ -16,8 +32,7 @@ body {
 }
 
 .body1 {
-    background: rgb(237,216,225);
-    background: linear-gradient(-5deg, #f6f4e8 0%, #bacec1 60%, #92ac9b 100%);
+    background: linear-gradient(-5deg, #ffffff 0%, #6398c7 60%, #0275d8 100%);
     background-attachment: fixed;
 }
 
@@ -47,11 +62,69 @@ body {
 
 /* Code source: https://ordinarycoders.com/blog/article/codepen-bootstrap-card-hovers */
 
-.card{
+.cardregis{
     transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
     cursor: pointer;
 }
+  :root {
+    --card-height: 50vh;
+    --card-width: calc(var(--card-height) / 1.5);
+  }
+    .card {
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+    cursor: pointer;
+    padding: 3px;
+    position: relative;
+    border-radius: 6px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    font-size: 1.5em;
+    cursor: pointer;
+    font-family: cursive;
+  }
 
-.card:hover{
-    transform: scale(1.03);
-}
+.card::before {
+    content: "";
+    width: 104%;
+    height: 102%;
+    border-radius: 8px;
+    background-image: linear-gradient(
+      var(--rotate)
+      , #5ddcff, #3c67e3 43%, #4e00c2);
+      position: absolute;
+      z-index: -1;
+      top: -1%;
+      left: -2%;
+      animation: spin 2.5s linear infinite;
+  }
+
+  .card::after {
+    position: absolute;
+    content: "";
+    top: calc(var(--card-height) / 6);
+    left: 0;
+    right: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    transform: scale(0.8);
+    filter: blur(calc(var(--card-height) / 6));
+    background-image: linear-gradient(
+      var(--rotate)
+      , #5ddcff, #3c67e3 43%, #4e00c2);
+      opacity: 1;
+    transition: opacity .5s;
+    animation: spin 2.5s linear infinite;
+  }
+
+.card:hover {
+    color: rgb(88 199 250 / 100%);
+    transition: color 1s;
+  }
+  .card:hover:before, .card:hover::after  {
+    animation: none;
+    opacity: 0;
+  } 
