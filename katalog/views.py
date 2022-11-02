@@ -33,9 +33,7 @@ def show_toko_html_1(request, nama, deskripsi):
 @login_required(login_url='/index/')
 def show_produk_html_1(request, id):
     produk_item = Product.objects.filter(id_toko=id) #id toko dari request
-    toko = toko_item = User.objects.get(id=id)
     context = {
-        'toko':toko,
         'list_produk' : produk_item,
     }
     return render(request, "produk.html", context)
